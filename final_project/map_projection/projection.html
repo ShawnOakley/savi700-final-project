@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+ <html>
+   <head>
+   <!-- http://www.census.gov/cgi-bin/geo/shapefiles2013/main -->
+   <!-- http://www.census.gov/cgi-bin/geo/shapefiles2013/layers.cgi -->
+   <!-- http://chimera.labs.oreilly.com/books/1230000000345/ch04.html#_referencing_d3 -->
+   <!-- https://stackoverflow.com/questions/15237073/d3-js-uncaught-syntaxerror-unexpected-token-illegal -->
+   <meta http-equiv="content-type" content="text/html; charset=UTF8">
+<!--      // <script type="text/javascript" src="./scripts/d3.min.js"></script>
+     // <script type="text/javascript" src="./scripts/jquery-2.2.0.min.js"></script> -->
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v0.min.js"></script>
+    <script src="http://libs.cartocdn.com/cartodb.js/v2/cartodb.js"></script>
+    <style type="text/css">
+    /*Getting svg image to fill browser completely*/
+    /*https://stackoverflow.com/questions/5643254/how-to-scale-svg-image-to-fill-browser-window*/
+      html, body { 
+        margin:0; 
+        padding:0; 
+        overflow:hidden 
+      }
+      
+      svg {
+        position: fixed;
+        width:100%;
+        height:100%;
+        top:0;
+        left:0;
+        border: solid 1px #ccc;
+        background: #636363;
+      }
+
+      .svg-container {
+          display: inline-block;
+          position: relative;
+          width: 100%;
+          padding-bottom: 100%; /* aspect ratio */
+          vertical-align: top;
+          overflow: hidden;
+      }
+      .svg-content-responsive {
+          display: inline-block;
+          position: absolute;
+          top: 10px;
+          left: 0;
+      }
+
+      path {
+        fill:black;
+        stroke:white;
+      }
+
+/*      .dem {
+        fill: blue;
+      }*/
+    </style>
+   </head>
+   <body>
+     <script type="text/javascript">
+            //Width and height
+            // var w = 800;
+            // var h = 800;
+// https://stackoverflow.com/questions/17014925/d3-center-and-scale-sector-on-map
+// https://stackoverflow.com/questions/13054741/how-do-i-move-states-in-the-d3-albersusa-projection
+// https://stackoverflow.com/questions/13303371/d3js-how-to-set-albers-projection-properly
+// https://gist.github.com/minikomi/4552802
+// https://eyeseast.github.io/visible-data/2013/08/26/responsive-d3/
+            //Define map projection
+            var projection = d3.geo.conicEqualArea()
+      								.scale(4700)
+      								.rotate([83, 0])
+      								.center([0, 45])
+
+            //Define path generator
+            var path = d3.geo.path()
+                             .projection(projection);
+
+// http://bl.ocks.org/mbostock/6238040
+// zoom transitions in d3
+// 
+// 
+// https://truongtx.me/2014/03/13/working-with-zoom-behavior-in-d3js-and-some-notes/
+// / create the zoom listener
+
+            //Create SVG element
+            var svg = d3.select("body")
+                        .append("div")
+                        .classed("svg-container", true)
+                        .append("svg")
+                         //responsive SVG needs these 2 attributes and no width and height attr
+                        .attr("preserveAspectRatio", "xMinYMin meet")
+                        .attr("viewBox", "0 0 600 400")
+                        //class to make it responsive
+                        .classed("svg-content-responsive", true); 
+                        // .attr("width", w)
+                        // .attr("height", h);
+
+
+            //Load in GeoJSON data
+            d3.json('./geojsons/cb_2013_26_sldl_500k.geojson', function(json) {
+
+              //Bind data and create one path per GeoJSON feature
+              svg.selectAll("path")
+                .data(json.features)
+                .enter()
+                .append("path")
+                // .attr("class", "dem")
+                .attr("d", path)
+
+
+            });
+            // Load in place data
+            // http://chimera.labs.oreilly.com/books/1230000000345/ch12.html#_simplify_the_shapes
+            // https://stackoverflow.com/questions/13897534/add-names-of-the-states-to-a-map-in-d3-js
+            d3.json('./geojsons/tl_2013_26_place.geojson', function(json) {
+
+              //Bind data and create one path per GeoJSON feature
+              svg.selectAll("text")
+                .data(json.features)
+                .enter()
+                .append("svg:text")
+                .text(function(d){
+                  return d.properties.name
+                 })
+                .attr("x", function(d){
+                  return path.centroid(d)[0];
+                })
+                .attr("y", function(d){
+                  return path.centroid(d)[1];
+                })
+                .attr("text-anchor", "middle")
+                .attr('font-size', '14pt')
+                .attr('fill', 'white')
+            });
+
+
+// https://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js
+// Scale on browser resize
+// Didn't work
+
+// http://housedems.com/district-34-map
+// https://www.google.com/search?q=flint+lat+long&oq=flint+lat+long&aqs=chrome..69i57.1871j0j7&sourceid=chrome&es_sm=119&ie=UTF-8
+// 43.0100° N, 83.6900° W
+// Actual measurements used: 43.04 N, 83.63 W
+        projection.scale(200000).rotate([83.63, 0]).center([0, 43.04]);
+
+        // var returnedPoints = projection.rotate([83.669657, 0]).center([0, 43.0562423]);
+        // var marks = [{long: -43.0562423, lat: 83.669657}];
+        // console.log(returnedPoints)
+// Zoom anims
+// http://codepen.io/smhigley/pen/jifrK/
+
+// http://bost.ocks.org/mike/map/
+
+// City of Flint Water Plant coodinates
+// GPS Longitude:-83.669657
+// GPS Latitude:43.0562423
+
+     </script>
+   </body>
+ </html>

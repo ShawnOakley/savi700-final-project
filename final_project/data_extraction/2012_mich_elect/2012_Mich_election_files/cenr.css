@@ -1,0 +1,376 @@
+/* Allows the table to remain properly centered on wider screens */
+
+img.masthead {
+	display:block;
+	/*display:inline-block;*/
+	/*float:left;*/
+	width:100% !important;
+	/*min-width:320px*/
+}
+.container {
+	max-width:1024px;
+}
+
+/*
+.dropdown-submenu {
+  position: relative;
+}
+*/
+
+/*Set larger defaults for drop menus*/
+.dropdown, .dropdown-menu {
+    /*font-size:26px;*/
+    font-size:24px;
+}
+
+/*For scrollable parts of dropdown menus*/
+.scrollable-menu {
+    font-size:24px;
+}
+
+#races_button {
+	font-size:22px;
+}
+
+/* pad and center all dropdown list items */
+.dropdown, .dropdown-menu li {
+	/*margin:0 0 5px 0;*/
+    text-align:center;
+}
+
+/*
+.dropdown-submenu > .dropdown-menu {
+  top: 0;
+  left: 15%;
+  margin-top: 5px;
+  margin-left: -1px;
+}
+*/
+
+.navbar .dropdown-submenu,
+.navbar .dropdown-menu {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body {
+  padding-top: 120px;
+  font-size: 14px;
+  /* From michigan.gov/sos css */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (min-width: 480px) {
+    .scrollable-menu {
+		/* 100 is better for desktop... tweak for submenu scroll height */
+        /*max-height: 200px;*/
+        max-height: 120px;
+        overflow-x: hidden;
+    }
+}
+
+.navbar-brand {
+    /*line-height:12px;*/
+    font-size:22px;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+.navbar-brand small {
+    display:block;
+    font-size:12px;
+	//color:white; //this works to change color of small text in brand
+}
+.navbar-brand p {
+	margin:0;
+	margin-top:-2px;
+	margin-bottom:-5px;
+	padding:0;
+}
+
+/* Shortens brand name for smaller devices */
+@media (max-width: 480px) {
+    .navbar-brand {
+        /*font-size:109%;*/
+        font-size:18px;
+    }
+}
+
+@media (max-width: 320px) {
+    .navbar-brand {
+        font-size:16px;
+	}
+	.navbar-brand small {
+        display:block;
+        font-size:10px;
+	}
+}
+
+/*increase navbar height and keep subs same height */
+.navbar-fixed-top {
+    min-height: 70px;
+}
+/* removing made it shorter but did not fix overflow */
+.navbar-nav > li > a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 70px;
+}
+.navbar-header {
+	min-height:70px;
+}
+
+/*Keeps Races submenu shorter when nav button shows */
+@media (max-width: 767px) {
+
+    .navbar-nav > li > a {
+
+        line-height: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+	}
+
+    /* pad all dropdown list items */
+    .dropdown, .dropdown-menu li {
+	    margin:0 0 5px 0;
+    }
+
+}
+
+table {
+	width:100%;
+	font-size: 14px;
+}
+
+/*table dividing lines*/
+/*
+th {
+    position:relative;
+}
+*/
+
+td {
+    padding: 4px;
+/*makes magic abbrevs work*/
+    /*position:relative;*/
+}
+
+/*
+.trow_0, .trow_1 {
+	border-bottom: 1pt solid linen;
+}
+
+.trow_0 {
+	border-radius: 10px;
+}
+*/
+
+/*.trow, .trowE {*/
+.trow, .trowEpdem, .trowEprep, .trowEpoth {
+	/*border-radius: 10px;*/
+	border-bottom: 1pt solid linen;
+}
+
+.offhdr {
+    font-weight: bold;
+	background-color:linen;
+	padding: 10px;
+	/*Note: box-shadow with box-radius buggy in FF. Lower right not working */
+	border-radius: 10px 0px 10px 0px;
+	box-shadow: 5px 5px 0px 0px #95591e;
+	border-collapse:separate; Needed by IE to make box shadows work*/
+}
+
+.offcty {
+    text-align:right;
+	font-weight: normal;
+	font-size: 12px;
+	width:15%;
+}
+.odesc{
+}
+
+/* works to change background of navbar */
+.navbar {
+	background-color:white;
+}
+
+.navbar-toggle {
+    margin-top: 20px;
+	margin-right:2px;
+	margin-bottom:15px;
+
+/* Button transformation */
+    border: none;
+    background: transparent !important;
+}
+
+/* Button transformation magic */
+.navbar-toggle:hover {
+  background: transparent !important;
+}
+.navbar-toggle .icon-bar {
+  width: 22px;
+  transition: all 0.2s;
+}
+.navbar-toggle .top-bar {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform-origin: 10% 10%;
+  -webkit-transform-origin: 10% 10%;
+  -ms-transform-origin: 10% 10%;
+}
+.navbar-toggle .middle-bar {
+  opacity: 0;
+}
+.navbar-toggle .bottom-bar {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform-origin: 10% 90%;
+  -webkit-transform-origin: 10% 90%;
+  -ms-transform-origin: 10% 90%;
+}
+.navbar-toggle.collapsed .top-bar {
+  transform: rotate(0);
+  -webkit-transform: rotate(0);
+  -ms-transform: rotate(0);
+}
+.navbar-toggle.collapsed .middle-bar {
+  opacity: 1;
+}
+.navbar-toggle.collapsed .bottom-bar {
+  transform: rotate(0);
+  -webkit-transform: rotate(0);
+  -ms-transform: rotate(0);
+}
+/* END Button transformation magic */
+
+nav .navbar-nav .navbar-right .navbar-brand li a {
+    color: white;
+}
+
+.vb100{
+	border:1px solid;
+	border-radius: 10px 0px;
+	border-left: none;
+	border-top: none;
+	color: #eecbaa;
+}
+
+.vbtd {
+    /*border:1px solid;*/
+	/*width:30%;*/
+	width:20%;
+}
+.prep {
+    background-color:red;
+	/*border:1px solid;*/
+	/*box-shadow: 5px 5px #95591e;*/
+	border-radius: 10px 0px;
+}
+.pdem {
+    background-color:blue;
+	/*border:1px solid;*/
+	border-radius: 10px 0px;
+}
+.poth {
+    background-color:teal;
+	/*border:1px solid;*/
+	border-radius: 10px 0px;
+}
+/*Make the anchor scroll back a bit so it is not obscured by the header*/
+div.anchor {
+    display: block;
+    position: relative;
+    /*top: -75px;
+have to adjust top value for style changes...so it aligns again
+    top: -85px;*/
+    visibility: hidden;
+}
+.votes {
+    text-align: right;
+}
+.pct {
+    text-align: right;
+}
+.colhdr {
+    /*text-align: center;*/
+    text-align: right;
+    font-weight: bold;
+}
+.totvotehdr {
+    text-align: right;
+    font-weight: bold;
+}
+
+#sosbanner-wide { display: none; }
+
+/* Custom, iPhone Retina */ 
+@media (min-width : 320px) {
+/* Toggle abbreviations on */
+	.abbr { display: block; }
+	.long { display: none; }
+
+	/*No vote bar for really small devices*/
+	.vbtd {
+		display:none;
+	}
+
+}
+
+/* Extra Small Devices, Phones */ 
+@media (min-width : 480px) {
+/* Toggle abbreviations off */
+	.abbr { display: none; }
+	.long { display: block; }
+
+    .vbtd {
+	    display:table-cell;
+    }
+
+}
+
+/* Small Devices, Tablets */
+    @media (min-width : 768px) {
+
+	/*Use smaller menu fonts as screen widens*/
+    .dropdown, .dropdown-menu {
+        font-size:14px;
+    }
+    .scrollable-menu {
+        font-size:14px;
+		position:relative;
+    }
+}
+
+/* Medium Devices, Desktops */
+    @media (min-width : 992px) {
+	.sosbanner-sm { display: none; }
+	.sosbanner-wide { display: block; }
+
+}
+
+/* Large Devices, Wide Screens */
+@media (min-width : 1200px) {
+	#sosbanner-sm { display: none; }
+	#sosbanner-wide { display: block; }
+}
+
+@media print {
+
+    * { margin: 0 !important; padding: 0 !important; }
+
+	#sosbanner-sm { display: none; }
+    #sosbanner-wide { display: none; }
+
+    .navbar {
+        display:none;
+    }
+
+    .vbtd {
+		display:none;
+    }
+}
+
