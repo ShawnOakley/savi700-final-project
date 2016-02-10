@@ -49,7 +49,7 @@
 		</div>
 	</div>
 	<div class="checkbox-container">
-		<h4><u>Consequences</u></h4>
+		<h4><u>Actions Taken</u></h4>
 		<div class="checkbox-div">
 		  <input type="checkbox" class="checkbox-consequences" id="school-checkbox" value=""><label for="school-checkbox">Schools Closed</label>
 		</div><span>  </span>
@@ -63,8 +63,16 @@
 		  <input type="checkbox" class="checkbox-consequences" id="layoffs-checkbox" value=""><label for="layoffs-checkbox">Municipal Staff Layoffs</label>
 		</div><span>  </span>
 		<div class="checkbox-div">
-		  <input type="checkbox" class="checkbox-consequences" id="police-fire-checkbox" value=""><label for="social-services-checkbox">Police/Fire Department Reduced or Eliminated</label>
+		  <input type="checkbox" class="checkbox-consequences" id="police-fire-checkbox" value=""><label for="police-fire-checkbox">Police/Fire Department Reduced or Eliminated</label>
 		</div><span>  </span>
+	</div>
+	<div class="slider-container">
+		<p>
+		  <label for="year">Date range:</label>
+		  <input type="text" id="year" readonly>
+		</p>
+		 
+		<div id="slider-range"></div>
 	</div>
 <!-- Need to add heat maps on demographics -->
 <!-- Need to add d3 graphs on demographics -->
@@ -80,6 +88,8 @@
 </div>
 
 <script type="text/javascript">
+
+L.mapbox.accessToken = 'pk.eyJ1Ijoic2hhd25vYWtsZXkiLCJhIjoiY2lrZzVzbGxmMDAyb3Y2bHlhaTNyZnN4eCJ9.5TE4YM7J3mhjIlnu-pLmLA';
 
 var hamtramckCoordinates = [-83.0572, 42.3978];
 var hamtramck2Coordinates = [-83, 42.3978];
@@ -114,11 +124,12 @@ var completeFeatureCollection = {
 	    "properties": {
 	        "name": "hamtramck1",
 	        "locationName": "Hamtramck",
-	        "consequences": ["schools"],
+	        "consequences": ["schools", "socialServices"],
 	        "year": 1988,
 	        "law": "Public Act 101",
 	        'marker-size': 'large',
-    		'marker-color': '#BE9A6B'
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'college'
 	    }
 	},
 	{
@@ -134,7 +145,8 @@ var completeFeatureCollection = {
 	        "year": 2000,
 	        "law": "Public Act 101",
 	        'marker-size': 'large',
-    		'marker-color': '#BE9A6B'
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'water'
 	    }
 	},
 	{
@@ -150,7 +162,8 @@ var completeFeatureCollection = {
 	        "year": 2000,
 	        "law": "Public Act 101",
 	        'marker-size': 'large',
-    		'marker-color': '#BE9A6B'
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol':'bank'
 	    }
 	},
 	{
@@ -166,7 +179,8 @@ var completeFeatureCollection = {
 	        "year": 2002,
 	        "law": "Public Act 101",
 	        'marker-size': 'large',
-    		'marker-color': '#BE9A6B'
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol':'hairdresser'
 	    }
 	},
 	{
@@ -183,7 +197,8 @@ var completeFeatureCollection = {
 	        "law": "Public Act 101",
 	        "color": "red",
 	        'marker-size': 'large',
-    		'marker-color': '#BE9A6B'
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol':'police'
 	    }
 	},
 	{
@@ -196,7 +211,8 @@ var completeFeatureCollection = {
 	        "law": "Public Act 101",
 	        "color": "red",
 	        'marker-size': 'large',
-    		'marker-color': '#BE9A6B'
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol':'college'
 	    },
 	    "geometry": {
 	        "type": "Point",
@@ -217,7 +233,8 @@ var completeFeatureCollection = {
 	        "color": "blue",
 	        "law": "Public Act 4",
 	        'marker-size': 'large',
-    		'marker-color': '#FF0000'
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'bank'
 	    }
 	},
 	{
@@ -234,7 +251,8 @@ var completeFeatureCollection = {
 	        "color": "blue",
 	        "law": "Public Act 4",
 	        'marker-size': 'large',
-    		'marker-color': '#FF0000'
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'hairdresser'
 	    }
 	},
 	{
@@ -251,7 +269,8 @@ var completeFeatureCollection = {
 	        "color": "blue",
 	        "law": "Public Act 4",
 	        'marker-size': 'large',
-    		'marker-color': '#FF0000'
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'college'
 	    }
 	},
 	{
@@ -268,7 +287,8 @@ var completeFeatureCollection = {
 	        "color": "green",
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
-    		'marker-color': '#0000FF'
+    		'marker-color': '#ABB7B7',
+    		'marker-symbol':'police'
 	    }
 	},
 	{
@@ -285,7 +305,8 @@ var completeFeatureCollection = {
 	        "color": "green",
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
-    		'marker-color': '#0000FF'
+    		'marker-color': '#ABB7B7',
+    		'marker-symbol':'bank'
 	    }
 	},
 	{
@@ -302,7 +323,8 @@ var completeFeatureCollection = {
 	        "color": "green",
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
-    		'marker-color': '#0000FF'
+    		'marker-color': '#ABB7B7',
+    		'marker-symbol':'hairdresser'
 	    }
 	},
 	{
@@ -319,7 +341,8 @@ var completeFeatureCollection = {
 	        "color": "green",
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
-    		'marker-color': '#0000FF'
+    		'marker-color': '#ABB7B7',
+    		'marker-symbol':'police'
 	    }
 	},
 	{
@@ -336,13 +359,25 @@ var completeFeatureCollection = {
 	        "color": "green",
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
-    		'marker-color': '#0000FF'
+    		'marker-color': '#ABB7B7',
+    		'marker-symbol':'water'
 	    }
 	}]
 };
+
+// Need to do:
+// Add key
+// Change colors to grey scale
+// Add letters to markers which list consequences for each marker (which correspond to uses of the law) (e.g., marker where school incident and police layoff happened will have SP in marker)
+// Add popups
+// Add slider for year
+// Add more informative tooltips
+// https://www.mapbox.com/mapbox.js/example/v1.0.0/marker-tooltips-outside-map/
+
 // https://stackoverflow.com/questions/16537326/leafletjs-how-to-remove-the-zoom-control
 // Set zoomControl to true when splash screen closes
 var map = L.map('map', {zoomControl: false}).setView([43.01,-83.69], 8);
+
 
 $(document).ready(function(){
 	$("#splashscreen").fadeIn("slow");
@@ -359,6 +394,18 @@ $(document).ready(function(){
     $('#layoffs-checkbox').prop('checked',true);
     $('#police-fire-checkbox').prop('checked',true);
 
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 1988,
+      max: 2016,
+      values: [ 1988, 2016 ],
+      slide: function( event, ui ) {
+        $( "#year" ).val( $( "#slider-range" ).slider( "values", 0 ) + " - " + $( "#slider-range" ).slider( "values", 1 ) );
+      }
+    });
+    $( "#year" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range" ).slider( "values", 1 ) );
+
 });
 
 $('.enter_link').click(function() { 
@@ -370,14 +417,16 @@ var selectedStatuteArray = ["Public Act 4", "Public Act 436", "Public Act 101"];
 
 var selectedConsequenceArray = ["schools","pensions","socialServices", "policeFire", "layoffs"]
 
-var filterObject = {selectedStatutes: selectedStatuteArray, selectedConsequences: selectedConsequenceArray};
-
 var findInStatuteArray = function(feature){
 	return selectedStatuteArray.includes(feature.properties.law);
 };
 
 // https://stackoverflow.com/questions/16312528/check-if-an-array-contains-any-elements-in-another-array-in-javascript
 
+var selectedYearRangeArray = [1988, 2016]
+
+var filterObject = {selectedStatutes: selectedStatuteArray, selectedConsequences: selectedConsequenceArray,
+	selectedYearRange: selectedYearRangeArray};
 
 var myLayer = L.mapbox.featureLayer().setFilter(function(feature) {
   return filterObject.selectedStatutes.includes(feature.properties.law) && filterObject.selectedConsequences.some(function(consequence) {
@@ -389,13 +438,10 @@ var updateFilter = function() {
 	myLayer.setFilter(function(feature) {
 	  return filterObject.selectedStatutes.includes(feature.properties.law) && filterObject.selectedConsequences.some(function(consequence) {
 	  		return feature.properties.consequences.indexOf(consequence) >= 0;
-	  });
+	  }) && (feature.properties.year >= filterObject.selectedYearRange[0] && feature.properties.year <= filterObject.selectedYearRange[1]);
 	});
 };
 
-
-
-L.mapbox.accessToken = 'pk.eyJ1Ijoic2hhd25vYWtsZXkiLCJhIjoiY2lrZzVzbGxmMDAyb3Y2bHlhaTNyZnN4eCJ9.5TE4YM7J3mhjIlnu-pLmLA';
 
 L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -419,6 +465,10 @@ var addToStatuteArray = function(string, statuteArray) {
 var addToConsequencesArray = function(string, consequencesArray) {
 	consequencesArray.push(string);
 };
+
+var setFilterRange = function(date1, date2) {
+	filterObject.selectedYearRange = [date1, date2];
+}
 
 // Using updateFilter method to clear markers based on presence of statute in checked boxes
     $('#PA4-checkbox').change(function(){
@@ -516,6 +566,12 @@ var addToConsequencesArray = function(string, consequencesArray) {
     	updateFilter();
     });
 
+
+    $("#slider-range").on('slidechange', function(){
+    	setFilterRange($( "#slider-range" ).slider( "values", 0 ), $( "#slider-range" ).slider( "values", 1 ));
+
+    	updateFilter();
+    });
 
 </script>
 </body>

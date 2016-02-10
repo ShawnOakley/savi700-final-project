@@ -75,7 +75,17 @@
 	color:white;
 }
 
+.slider-container {
+	display:inline-block;
+	color:white;
+}
+
 .checkbox-div {
 	display:inline;
 	vertical-align:top;
+}
+
+#year {
+	color:black; 
+	font-weight:bold;
 }
