@@ -1,0 +1,81 @@
+#select-menu {
+	margin:15px;
+	border-style: solid;
+    border-width: 1px;
+    border-color: white;
+   	width:90%;
+   	display:inline;
+}
+
+#display-panel {
+	width:100%;
+}
+
+#map { 
+	height:100%;
+	width:100%;
+	margin:5px;
+}
+
+.button-container {
+	width:100%;
+}
+
+#btn-splash {
+	color:white;
+	background-color:black;
+	border-color:white;
+	border-width:1px;
+	border-style: solid;
+	border-radius:5%;
+}
+
+#btn-splash:hover {
+	color:black;
+	background-color:white;
+}
+
+.map-background {
+	height:100%;
+	background-color:black;
+}
+
+.leaflet-popup-content {
+	color:black;
+}
+
+#splashscreen {
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    width:100%;
+    opacity:0.75;
+    background-color:black;
+    color:white;
+    z-index:1000;
+    display:none;
+}
+
+/*#splash-backdrop {
+    width: 50%;
+     Set the margin-left and margin-right automatically set 
+    margin: 0 auto; 
+	height:200px;
+	background-color:black;
+}*/
+
+/*#splash-backdrop:hover {
+
+    opacity:1.0;
+}*/
+
+.checkbox-container {
+	display:inline-block;
+	color:white;
+}
+
+.checkbox-div {
+	display:inline;
+	vertical-align:top;
+}

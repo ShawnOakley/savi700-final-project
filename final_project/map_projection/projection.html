@@ -6,11 +6,12 @@
    <!-- http://chimera.labs.oreilly.com/books/1230000000345/ch04.html#_referencing_d3 -->
    <!-- https://stackoverflow.com/questions/15237073/d3-js-uncaught-syntaxerror-unexpected-token-illegal -->
    <meta http-equiv="content-type" content="text/html; charset=UTF8">
-<!--      // <script type="text/javascript" src="./scripts/d3.min.js"></script>
-     // <script type="text/javascript" src="./scripts/jquery-2.2.0.min.js"></script> -->
+    <script type="text/javascript" src="./scripts/d3.min.js"></script>
+    <script type="text/javascript" src="./scripts/jquery-2.2.0.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://d3js.org/topojson.v0.min.js"></script>
     <script src="http://libs.cartocdn.com/cartodb.js/v2/cartodb.js"></script>
+    <!-- // <script src="https://code.jquery.com/jquery-git2.min.js"></script> -->
     <style type="text/css">
     /*Getting svg image to fill browser completely*/
     /*https://stackoverflow.com/questions/5643254/how-to-scale-svg-image-to-fill-browser-window*/
@@ -50,9 +51,10 @@
         stroke:white;
       }
 
-/*      .dem {
+      /* Make Flint blue in Demo*/
+      #id-2013-88 {
         fill: blue;
-      }*/
+      }
     </style>
    </head>
    <body>
@@ -82,6 +84,11 @@
 // https://truongtx.me/2014/03/13/working-with-zoom-behavior-in-d3js-and-some-notes/
 // / create the zoom listener
 
+// assigning ids in d3
+// https://stackoverflow.com/questions/19387898/how-to-assign-unique-id-to-svg-text-element-in-d3-javascript
+// 
+// https://stackoverflow.com/questions/13188395/setting-an-id-issue-in-d3
+
             //Create SVG element
             var svg = d3.select("body")
                         .append("div")
@@ -96,56 +103,73 @@
                         // .attr("height", h);
 
 
-            //Load in GeoJSON data
-            d3.json('./geojsons/cb_2013_26_sldl_500k.geojson', function(json) {
+    //Load in GeoJSON data
+    d3.json('./geojsons/cb_2013_26_sldl_500k.geojson', function(json) {
 
-              //Bind data and create one path per GeoJSON feature
-              svg.selectAll("path")
-                .data(json.features)
-                .enter()
-                .append("path")
-                // .attr("class", "dem")
-                .attr("d", path)
+      //Bind data and create one path per GeoJSON feature
+      svg.selectAll("path")
+        .data(json.features)
+        .enter()
+        .append("path")
+        .attr("id", function(d, i){ var result = 'id-2013-'+i; return result; })
+        .attr("d", path);
+    });
+
+ // Load in place data
+  // http://chimera.labs.oreilly.com/books/1230000000345/ch12.html#_simplify_the_shapes
+  // https://stackoverflow.com/questions/13897534/add-names-of-the-states-to-a-map-in-d3-js
+  d3.json('./geojsons/tl_2013_26_place.geojson', function(json) {
 
 
-            });
-            // Load in place data
-            // http://chimera.labs.oreilly.com/books/1230000000345/ch12.html#_simplify_the_shapes
-            // https://stackoverflow.com/questions/13897534/add-names-of-the-states-to-a-map-in-d3-js
-            d3.json('./geojsons/tl_2013_26_place.geojson', function(json) {
+    var marks = [{lat: 43.0562423, long: 83.669657}];
+    //Bind data and create one path per GeoJSON feature
+    svg.selectAll("text")
+      .data(json.features)
+      .enter()
+      .append("svg:text")
+      .text(function(d){
+        return d.properties.name
+       })
+      .attr("x", function(d){
+        return path.centroid(d)[0];
+      })
+      .attr("y", function(d){
+        return path.centroid(d)[1];
+      })
+      .attr("text-anchor", "middle")
+      .attr('font-size', '14pt')
+      .attr('fill', 'white')
+      .style('opacity',0)
+      .transition()
+      .delay(500)
+      .duration(500)
+      .style('opacity',1)
+    
+    svg.selectAll('.mark')
+       .data(marks)
+       .enter()
+       .append('image')
+       .attr('class','mark')
+       .attr('width', 20)
+       .attr('height', 20)
+       .attr("xlink:href",'https://cdn3.iconfinder.com/data/icons/softwaredemo/PNG/24x24/DrawingPin1_Blue.png')
+       // .attr('rotate', function(d) {return 'rotate('+ [d.long, 0] +')'})
+       // .attr('center', function(d) {return 'center('+ [0, d.lat] +')'})
+  });
 
-              //Bind data and create one path per GeoJSON feature
-              svg.selectAll("text")
-                .data(json.features)
-                .enter()
-                .append("svg:text")
-                .text(function(d){
-                  return d.properties.name
-                 })
-                .attr("x", function(d){
-                  return path.centroid(d)[0];
-                })
-                .attr("y", function(d){
-                  return path.centroid(d)[1];
-                })
-                .attr("text-anchor", "middle")
-                .attr('font-size', '14pt')
-                .attr('fill', 'white')
-            });
+// http://housedems.com/district-34-map
+// https://www.google.com/search?q=flint+lat+long&oq=flint+lat+long&aqs=chrome..69i57.1871j0j7&sourceid=chrome&es_sm=119&ie=UTF-8
+// 43.0100° N, 83.6900° W
+// Actual measurements used: 43.04 N, 83.63 W
+      projection.scale(200000).rotate([83.63, 0]).center([0, 43.04]);
 
 
 // https://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js
 // Scale on browser resize
 // Didn't work
 
-// http://housedems.com/district-34-map
-// https://www.google.com/search?q=flint+lat+long&oq=flint+lat+long&aqs=chrome..69i57.1871j0j7&sourceid=chrome&es_sm=119&ie=UTF-8
-// 43.0100° N, 83.6900° W
-// Actual measurements used: 43.04 N, 83.63 W
-        projection.scale(200000).rotate([83.63, 0]).center([0, 43.04]);
-
         // var returnedPoints = projection.rotate([83.669657, 0]).center([0, 43.0562423]);
-        // var marks = [{long: -43.0562423, lat: 83.669657}];
+        // var marks = [{long: 43.0562423, lat: -83.669657}];
         // console.log(returnedPoints)
 // Zoom anims
 // http://codepen.io/smhigley/pen/jifrK/
@@ -153,8 +177,8 @@
 // http://bost.ocks.org/mike/map/
 
 // City of Flint Water Plant coodinates
-// GPS Longitude:-83.669657
-// GPS Latitude:43.0562423
+// GPS Longitude:83.669657 West (83 deg 41'15'')
+// GPS Latitude:43.0562423 North
 
      </script>
    </body>
