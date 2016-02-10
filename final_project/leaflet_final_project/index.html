@@ -48,6 +48,9 @@
 		  <input type="checkbox" class="checkbox-law" id="PA436-checkbox" value=""><label for="PA436-checkbox">Public Act 436 of 2012</label>
 		</div>
 	</div>
+	<div class="info-container">
+		<div id='info' class='info'></div>
+	</div>
 	<div class="checkbox-container">
 		<h4><u>Actions Taken</u></h4>
 		<div class="checkbox-div">
@@ -195,7 +198,6 @@ var completeFeatureCollection = {
 	        "consequences": ["policeFire"],
 	        "year": 2008,
 	        "law": "Public Act 101",
-	        "color": "red",
 	        'marker-size': 'large',
     		'marker-color': '#BE9A6B',
     		'marker-symbol':'police'
@@ -209,7 +211,6 @@ var completeFeatureCollection = {
 	        "consequences": ["schools"],
 	        "year": 2009,
 	        "law": "Public Act 101",
-	        "color": "red",
 	        'marker-size': 'large',
     		'marker-color': '#BE9A6B',
     		'marker-symbol':'college'
@@ -230,7 +231,6 @@ var completeFeatureCollection = {
 	        "locationName": "Benton Harbor",
 	        "consequences": ["pensions"],
 	        "year": 2010,
-	        "color": "blue",
 	        "law": "Public Act 4",
 	        'marker-size': 'large',
     		'marker-color': '#6C7A89',
@@ -248,7 +248,6 @@ var completeFeatureCollection = {
 	        "locationName": "Pontiac",
 	        "consequences": ["layoffs"],
 	        "year": 2010,
-	        "color": "blue",
 	        "law": "Public Act 4",
 	        'marker-size': 'large',
     		'marker-color': '#6C7A89',
@@ -266,7 +265,6 @@ var completeFeatureCollection = {
 	        "locationName": "Flint",
 	        "consequences": ["schools"],
 	        "year": 2011,
-	        "color": "blue",
 	        "law": "Public Act 4",
 	        'marker-size': 'large',
     		'marker-color': '#6C7A89',
@@ -284,7 +282,6 @@ var completeFeatureCollection = {
 	        "locationName": "Highland Park",
 	        "consequences": ["policeFire"],
 	        "year": 2012,
-	        "color": "green",
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
     		'marker-color': '#ABB7B7',
@@ -302,7 +299,6 @@ var completeFeatureCollection = {
 	        "locationName": "Muskegon Heights",
 	        "consequences": ["pensions"],
 	        "year": 2012,
-	        "color": "green",
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
     		'marker-color': '#ABB7B7',
@@ -320,7 +316,6 @@ var completeFeatureCollection = {
 	        "locationName": "Allen Park",
 	        "consequences": ["layoffs"],
 	        "year": 2012,
-	        "color": "green",
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
     		'marker-color': '#ABB7B7',
@@ -450,12 +445,36 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png?acc
     accessToken: 'pk.eyJ1Ijoic2hhd25vYWtsZXkiLCJhIjoiY2lrZzVzbGxmMDAyb3Y2bHlhaTNyZnN4eCJ9.5TE4YM7J3mhjIlnu-pLmLA'
 }).addTo(map);
 
-// http://stackexchange.vd-zr.ru/questions/178876/speeding-up-large-geojsons-in-leaflet-maps?&d=gis
+// https://www.mapbox.com/mapbox.js/example/v1.0.0/marker-tooltips-outside-map/
+
+var info = document.getElementById('info');
+
+function empty() {
+  info.innerHTML = '<div><strong>Click a marker</strong></div>';
+  }
+
 
 myLayer.setGeoJSON(completeFeatureCollection);
-myLayer.on('click', function(e) {
-    window.open(e.layer.feature.properties.locationName);
+// Listen for individual marker clicks.
+myLayer.on('click',function(e) {
+    // Force the popup closed.
+    e.layer.closePopup();
+
+    var feature = e.layer.feature;
+    var content = '<div><strong> City: ' + feature.properties.locationName + '</strong>' +
+                  '<p> Legal basis: ' + feature.properties.law + '</p></div>';
+
+    info.innerHTML = content;
+    console.log(info)
+    $(info).show();
 });
+
+// Clear the tooltip when map is clicked.
+map.on('move', empty);
+
+// Trigger empty contents when the script
+// has loaded on the page.
+empty();
 
 // https://www.mapbox.com/mapbox.js/api/v2.1.5/l-mapbox-featurelayer/#section-featurelayer-setfilter
 var addToStatuteArray = function(string, statuteArray) {

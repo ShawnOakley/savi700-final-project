@@ -80,6 +80,16 @@
 	color:white;
 }
 
+.info-container {
+	display:inline-block;
+	color:white;
+	text-align: center;
+}
+
+#info {
+	display:none;
+}
+
 .checkbox-div {
 	display:inline;
 	vertical-align:top;
