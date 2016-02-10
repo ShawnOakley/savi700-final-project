@@ -1,0 +1,256 @@
+{
+	"type": "FeatureCollection",
+	"features" : [
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": hamtramckCoordinates
+	    },
+	    "properties": {
+	        "name": "hamtramck1",
+	        "locationName": "Hamtramck",
+	        "actionsTaken": [],
+	        "time": "1988-01-22 10:24:59+01",
+	        "law": "Public Act 101",
+	        "color": "red",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'cafe'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": hamtramckCoordinates
+	    },
+	    "properties": {
+	        "name": "hamtramck2",
+	        "locationName": "Hamtramck",
+	        "actionsTaken": [],
+	        "time": "2000-01-22 10:24:59+01",
+	        "law": "Public Act 101",
+	        "color": "red",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'cafe'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": highlandParkCoordinates
+	    },
+	    "properties": {
+	        "name": "highLandPark1",
+	        "locationName": "Highland Park",
+	        "actionsTaken": [],
+	        "time": "2000-01-22 10:24:59+01",
+	        "law": "Public Act 101",
+	        "color": "red",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'cafe'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": flintCoordinates
+	    },
+	    "properties": {
+	        "name": "flint1",
+	        "locationName": "Flint",
+	        "actionsTaken": [],
+	        "time": "2002-01-22 10:24:59+01",
+	        "law": "Public Act 101",
+	        "color": "red",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'cafe'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": threeOaksCoordinates
+	    },
+	    "properties": {
+	        "name": "threeOaks1",
+	        "locationName": "Three Oaks",
+	        "actionsTaken": [],
+	        "time": "2008-01-22 10:24:59+01",
+	        "law": "Public Act 101",
+	        "color": "red",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'cafe'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "properties": {
+	        "name": "detroit1",
+	        "locationName": "Detroit",
+	        "actionsTaken": [],
+	        "time": "2009-01-22 10:24:59+01",
+	        "law": "Public Act 101",
+	        "color": "red",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'cafe'
+	    },
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": detroitCoordinates
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": bentonHarborCoordinates
+	    },
+	    "properties": {
+	        "name": "bentonHarbor",
+	        "locationName": "Benton Harbor",
+	        "actionsTaken": [],
+	        "time": "2010-01-22 10:24:59+01",
+	        "color": "blue",
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'cafe'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": pontiacCoordinates
+	    },
+	    "properties": {
+	        "name": "pontiacHarbor",
+	        "locationName": "Pontiac",
+	        "actionsTaken": [],
+	        "time": "2010-01-22 10:24:59+01",
+	        "color": "blue",
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'cafe'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": flintCoordinates
+	    },
+	    "properties": {
+	        "name": "flint2",
+	        "locationName": "Flint",
+	        "actionsTaken": [],
+	        "time": "2011-01-22 10:24:59+01",
+	        "color": "blue",
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'cafe'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": highlandParkCoordinates
+	    },
+	    "properties": {
+	        "name": "highlandPark2",
+	        "locationName": "Highland Park",
+	        "actionsTaken": [],
+	        "time": "2012-01-22 10:24:59+01",
+	        "color": "green",
+	        "law": "Public Act 436",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'cafe'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": muskegonHeightsCoordinates
+	    },
+	    "properties": {
+	        "name": "muskegonHeights1",
+	        "locationName": "Muskegon Heights",
+	        "actionsTaken": [],
+	        "time": "2012-01-22 10:24:59+01",
+	        "color": "green",
+	        "law": "Public Act 436",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'cafe'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": allenParkCoordinates
+	    },
+	    "properties": {
+	        "name": "allenPark1",
+	        "locationName": "Allen Park",
+	        "actionsTaken": [],
+	        "time": "2012-01-22 10:24:59+01",
+	        "color": "green",
+	        "law": "Public Act 436",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'cafe'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": hamtramckCoordinates
+	    },
+	    "properties": {
+	        "name": "hamtramck3",
+	        "locationName": "Hamtramck",
+	        "actionsTaken": [],
+	        "time": "2013-01-22 10:24:59+01",
+	        "color": "green",
+	        "law": "Public Act 436",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'cafe'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": bentonHarborCoordinates
+	    },
+	    "properties": {
+	        "name": "bentonHarbor2",
+	        "locationName": "Benton Harbor",
+	        "actionsTaken": [],
+	        "time": "2013-01-22 10:24:59+01",
+	        "color": "green",
+	        "law": "Public Act 436",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol': 'cafe'
+	    }
+	}]
+}

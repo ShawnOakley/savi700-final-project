@@ -60,10 +60,10 @@
 		  <input type="checkbox" class="checkbox-consequences" id="social-services-checkbox" value=""><label for="social-services-checkbox">Municipal Services Defunded/Outsourced</label>
 		</div><span>  </span>
 		<div class="checkbox-div">
-		  <input type="checkbox" class="checkbox-consequences" id="social-services-checkbox" value=""><label for="social-services-checkbox">Municipal Staff Layoffs</label>
+		  <input type="checkbox" class="checkbox-consequences" id="layoffs-checkbox" value=""><label for="layoffs-checkbox">Municipal Staff Layoffs</label>
 		</div><span>  </span>
 		<div class="checkbox-div">
-		  <input type="checkbox" class="checkbox-consequences" id="social-services-checkbox" value=""><label for="social-services-checkbox">Police/Fire Department Reduced or Eliminated</label>
+		  <input type="checkbox" class="checkbox-consequences" id="police-fire-checkbox" value=""><label for="social-services-checkbox">Police/Fire Department Reduced or Eliminated</label>
 		</div><span>  </span>
 	</div>
 <!-- Need to add heat maps on demographics -->
@@ -81,6 +81,265 @@
 
 <script type="text/javascript">
 
+var hamtramckCoordinates = [-83.0572, 42.3978];
+var hamtramck2Coordinates = [-83, 42.3978];
+var hamtramck3Coordinates = [-83.0572, 42.1];
+
+var highlandParkCoordinates = [-83.1017, 42.4036];
+var highlandPark2Coordinates = [-83, 42.4036];
+
+var flintCoordinates = [-83.69, 43.01];
+var flint2Coordinates = [-83.6, 43];
+
+var threeOaksCoordinates = [-86.6106, 41.7986];
+var detroitCoordinates = [-83.0458, 42.3314];
+var ecorseCoordinates = [-83.1458, 42.2444];
+
+var bentonHarborCoordinates = [-86.4483,42.1111];
+var bentonHarbor2Coordinates = [-86.3,42.05];
+
+var pontiacCoordinates = [-83.2925, 42.6461];
+var muskegonHeightsCoordinates = [-86.2389, 43.2011];
+var allenParkCoordinates = [-86.4483, 42.1111];
+
+var completeFeatureCollection = {
+	"type": "FeatureCollection",
+	"features" : [
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": hamtramckCoordinates
+	    },
+	    "properties": {
+	        "name": "hamtramck1",
+	        "locationName": "Hamtramck",
+	        "consequences": ["schools"],
+	        "year": 1988,
+	        "law": "Public Act 101",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": hamtramck2Coordinates
+	    },
+	    "properties": {
+	        "name": "hamtramck2",
+	        "locationName": "Hamtramck",
+	        "consequences": ["socialServices"],
+	        "year": 2000,
+	        "law": "Public Act 101",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": highlandParkCoordinates
+	    },
+	    "properties": {
+	        "name": "highLandPark1",
+	        "locationName": "Highland Park",
+	        "consequences": ["pensions"],
+	        "year": 2000,
+	        "law": "Public Act 101",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": flintCoordinates
+	    },
+	    "properties": {
+	        "name": "flint1",
+	        "locationName": "Flint",
+	        "consequences": ["layoffs"],
+	        "year": 2002,
+	        "law": "Public Act 101",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": threeOaksCoordinates
+	    },
+	    "properties": {
+	        "name": "threeOaks1",
+	        "locationName": "Three Oaks",
+	        "consequences": ["policeFire"],
+	        "year": 2008,
+	        "law": "Public Act 101",
+	        "color": "red",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "properties": {
+	        "name": "detroit1",
+	        "locationName": "Detroit",
+	        "consequences": ["schools"],
+	        "year": 2009,
+	        "law": "Public Act 101",
+	        "color": "red",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B'
+	    },
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": detroitCoordinates
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": bentonHarborCoordinates
+	    },
+	    "properties": {
+	        "name": "bentonHarbor",
+	        "locationName": "Benton Harbor",
+	        "consequences": ["pensions"],
+	        "year": 2010,
+	        "color": "blue",
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#FF0000'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": pontiacCoordinates
+	    },
+	    "properties": {
+	        "name": "pontiacHarbor",
+	        "locationName": "Pontiac",
+	        "consequences": ["layoffs"],
+	        "year": 2010,
+	        "color": "blue",
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#FF0000'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": flint2Coordinates
+	    },
+	    "properties": {
+	        "name": "flint2",
+	        "locationName": "Flint",
+	        "consequences": ["schools"],
+	        "year": 2011,
+	        "color": "blue",
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#FF0000'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": highlandPark2Coordinates
+	    },
+	    "properties": {
+	        "name": "highlandPark2",
+	        "locationName": "Highland Park",
+	        "consequences": ["policeFire"],
+	        "year": 2012,
+	        "color": "green",
+	        "law": "Public Act 436",
+	        'marker-size': 'large',
+    		'marker-color': '#0000FF'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": muskegonHeightsCoordinates
+	    },
+	    "properties": {
+	        "name": "muskegonHeights1",
+	        "locationName": "Muskegon Heights",
+	        "consequences": ["pensions"],
+	        "year": 2012,
+	        "color": "green",
+	        "law": "Public Act 436",
+	        'marker-size': 'large',
+    		'marker-color': '#0000FF'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": allenParkCoordinates
+	    },
+	    "properties": {
+	        "name": "allenPark1",
+	        "locationName": "Allen Park",
+	        "consequences": ["layoffs"],
+	        "year": 2012,
+	        "color": "green",
+	        "law": "Public Act 436",
+	        'marker-size': 'large',
+    		'marker-color': '#0000FF'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": hamtramck3Coordinates
+	    },
+	    "properties": {
+	        "name": "hamtramck3",
+	        "locationName": "Hamtramck",
+	        "consequences": ["policeFire"],
+	        "year": 2013,
+	        "color": "green",
+	        "law": "Public Act 436",
+	        'marker-size': 'large',
+    		'marker-color': '#0000FF'
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": bentonHarbor2Coordinates
+	    },
+	    "properties": {
+	        "name": "bentonHarbor2",
+	        "locationName": "Benton Harbor",
+	        "consequences": ["socialServices"],
+	        "year": 2013,
+	        "color": "green",
+	        "law": "Public Act 436",
+	        'marker-size': 'large',
+    		'marker-color': '#0000FF'
+	    }
+	}]
+};
 // https://stackoverflow.com/questions/16537326/leafletjs-how-to-remove-the-zoom-control
 // Set zoomControl to true when splash screen closes
 var map = L.map('map', {zoomControl: false}).setView([43.01,-83.69], 8);
@@ -93,6 +352,13 @@ $(document).ready(function(){
     $('#PA101-checkbox').prop('checked',true);
     $('#PA4-checkbox').prop('checked',true);
     $('#PA436-checkbox').prop('checked',true);
+
+    $('#school-checkbox').prop('checked',true);
+    $('#pension-checkbox').prop('checked',true);
+    $('#social-services-checkbox').prop('checked',true);
+    $('#layoffs-checkbox').prop('checked',true);
+    $('#police-fire-checkbox').prop('checked',true);
+
 });
 
 $('.enter_link').click(function() { 
@@ -100,298 +366,43 @@ $('.enter_link').click(function() {
     new L.Control.Zoom({ position: 'topleft' }).addTo(map)
  });
 
-	var hamtramckCoordinates = [-83.0572, 42.3978];
-	var highlandParkCoordinates = [-83.1017, 42.4036];
-	var flintCoordinates = [-83.69, 43.01];
-	var threeOaksCoordinates = [-86.6106, 41.7986];
-	var detroitCoordinates = [-83.0458, 42.3314];
-	var ecorseCoordinates = [-83.1458, 42.2444];
-	var bentonHarborCoordinates = [-86.4483,42.1111];
-	var pontiacCoordinates = [-83.2925, 42.6461];
-	var muskegonHeightsCoordinates = [-86.2389, 43.2011];
-	var allenParkCoordinates = [-86.4483, 42.1111];
+var selectedStatuteArray = ["Public Act 4", "Public Act 436", "Public Act 101"];
 
-	var selectedStatuteArray = ["Public Act 4", "Public Act 436", "Public Act 101"];
+var selectedConsequenceArray = ["schools","pensions","socialServices", "policeFire", "layoffs"]
 
-	var findInStatuteArray = function(feature){
-		return selectedStatuteArray.includes(feature.properties.law);
-	};
+var filterObject = {selectedStatutes: selectedStatuteArray, selectedConsequences: selectedConsequenceArray};
 
-	var myLayer = L.mapbox.featureLayer().setFilter(function(feature) {
-      return selectedStatuteArray.includes(feature.properties.law);
-    }).addTo(map);
+var findInStatuteArray = function(feature){
+	return selectedStatuteArray.includes(feature.properties.law);
+};
 
-	var updateStatuteFilter = function() {
-		myLayer.setFilter(function(feature) {
-		  return selectedStatuteArray.includes(feature.properties.law);
-		});
-	};
+// https://stackoverflow.com/questions/16312528/check-if-an-array-contains-any-elements-in-another-array-in-javascript
 
-	var completeFeatureCollection = {
-		"type": "FeatureCollection",
-		"features" : [
-		{
-		    "type": "Feature",
-		    "geometry": {
-		        "type": "Point",
-		        "coordinates": hamtramckCoordinates
-		    },
-		    "properties": {
-		        "name": "hamtramck1",
-		        "locationName": "Hamtramck",
-		        "actionsTaken": [],
-		        "time": "1988-01-22 10:24:59+01",
-		        "law": "Public Act 101",
-		        "color": "red",
-		        'marker-size': 'large',
-        		'marker-color': '#BE9A6B',
-        		'marker-symbol': 'cafe'
-		    }
-		},
-		{
-		    "type": "Feature",
-		    "geometry": {
-		        "type": "Point",
-		        "coordinates": hamtramckCoordinates
-		    },
-		    "properties": {
-		        "name": "hamtramck2",
-		        "locationName": "Hamtramck",
-		        "actionsTaken": [],
-		        "time": "2000-01-22 10:24:59+01",
-		        "law": "Public Act 101",
-		        "color": "red",
-		        'marker-size': 'large',
-        		'marker-color': '#BE9A6B',
-        		'marker-symbol': 'cafe'
-		    }
-		},
-		{
-		    "type": "Feature",
-		    "geometry": {
-		        "type": "Point",
-		        "coordinates": highlandParkCoordinates
-		    },
-		    "properties": {
-		        "name": "highLandPark1",
-		        "locationName": "Highland Park",
-		        "actionsTaken": [],
-		        "time": "2000-01-22 10:24:59+01",
-		        "law": "Public Act 101",
-		        "color": "red",
-		        'marker-size': 'large',
-        		'marker-color': '#BE9A6B',
-        		'marker-symbol': 'cafe'
-		    }
-		},
-		{
-		    "type": "Feature",
-		    "geometry": {
-		        "type": "Point",
-		        "coordinates": flintCoordinates
-		    },
-		    "properties": {
-		        "name": "flint1",
-		        "locationName": "Flint",
-		        "actionsTaken": [],
-		        "time": "2002-01-22 10:24:59+01",
-		        "law": "Public Act 101",
-		        "color": "red",
-		        'marker-size': 'large',
-        		'marker-color': '#BE9A6B',
-        		'marker-symbol': 'cafe'
-		    }
-		},
-		{
-		    "type": "Feature",
-		    "geometry": {
-		        "type": "Point",
-		        "coordinates": threeOaksCoordinates
-		    },
-		    "properties": {
-		        "name": "threeOaks1",
-		        "locationName": "Three Oaks",
-		        "actionsTaken": [],
-		        "time": "2008-01-22 10:24:59+01",
-		        "law": "Public Act 101",
-		        "color": "red",
-		        'marker-size': 'large',
-        		'marker-color': '#BE9A6B',
-        		'marker-symbol': 'cafe'
-		    }
-		},
-		{
-		    "type": "Feature",
-		    "properties": {
-		        "name": "detroit1",
-		        "locationName": "Detroit",
-		        "actionsTaken": [],
-		        "time": "2009-01-22 10:24:59+01",
-		        "law": "Public Act 101",
-		        "color": "red",
-		        'marker-size': 'large',
-        		'marker-color': '#BE9A6B',
-        		'marker-symbol': 'cafe'
-		    },
-		    "geometry": {
-		        "type": "Point",
-		        "coordinates": detroitCoordinates
-		    }
-		},
-		{
-		    "type": "Feature",
-		    "geometry": {
-		        "type": "Point",
-		        "coordinates": bentonHarborCoordinates
-		    },
-		    "properties": {
-		        "name": "bentonHarbor",
-		        "locationName": "Benton Harbor",
-		        "actionsTaken": [],
-		        "time": "2010-01-22 10:24:59+01",
-		        "color": "blue",
-		        "law": "Public Act 4",
-		        'marker-size': 'large',
-        		'marker-color': '#BE9A6B',
-        		'marker-symbol': 'cafe'
-		    }
-		},
-		{
-		    "type": "Feature",
-		    "geometry": {
-		        "type": "Point",
-		        "coordinates": pontiacCoordinates
-		    },
-		    "properties": {
-		        "name": "pontiacHarbor",
-		        "locationName": "Pontiac",
-		        "actionsTaken": [],
-		        "time": "2010-01-22 10:24:59+01",
-		        "color": "blue",
-		        "law": "Public Act 4",
-		        'marker-size': 'large',
-        		'marker-color': '#BE9A6B',
-        		'marker-symbol': 'cafe'
-		    }
-		},
-		{
-		    "type": "Feature",
-		    "geometry": {
-		        "type": "Point",
-		        "coordinates": flintCoordinates
-		    },
-		    "properties": {
-		        "name": "flint2",
-		        "locationName": "Flint",
-		        "actionsTaken": [],
-		        "time": "2011-01-22 10:24:59+01",
-		        "color": "blue",
-		        "law": "Public Act 4",
-		        'marker-size': 'large',
-        		'marker-color': '#BE9A6B',
-        		'marker-symbol': 'cafe'
-		    }
-		},
-		{
-		    "type": "Feature",
-		    "geometry": {
-		        "type": "Point",
-		        "coordinates": highlandParkCoordinates
-		    },
-		    "properties": {
-		        "name": "highlandPark2",
-		        "locationName": "Highland Park",
-		        "actionsTaken": [],
-		        "time": "2012-01-22 10:24:59+01",
-		        "color": "green",
-		        "law": "Public Act 436",
-		        'marker-size': 'large',
-        		'marker-color': '#BE9A6B',
-        		'marker-symbol': 'cafe'
-		    }
-		},
-		{
-		    "type": "Feature",
-		    "geometry": {
-		        "type": "Point",
-		        "coordinates": muskegonHeightsCoordinates
-		    },
-		    "properties": {
-		        "name": "muskegonHeights1",
-		        "locationName": "Muskegon Heights",
-		        "actionsTaken": [],
-		        "time": "2012-01-22 10:24:59+01",
-		        "color": "green",
-		        "law": "Public Act 436",
-		        'marker-size': 'large',
-        		'marker-color': '#BE9A6B',
-        		'marker-symbol': 'cafe'
-		    }
-		},
-		{
-		    "type": "Feature",
-		    "geometry": {
-		        "type": "Point",
-		        "coordinates": allenParkCoordinates
-		    },
-		    "properties": {
-		        "name": "allenPark1",
-		        "locationName": "Allen Park",
-		        "actionsTaken": [],
-		        "time": "2012-01-22 10:24:59+01",
-		        "color": "green",
-		        "law": "Public Act 436",
-		        'marker-size': 'large',
-        		'marker-color': '#BE9A6B',
-        		'marker-symbol': 'cafe'
-		    }
-		},
-		{
-		    "type": "Feature",
-		    "geometry": {
-		        "type": "Point",
-		        "coordinates": hamtramckCoordinates
-		    },
-		    "properties": {
-		        "name": "hamtramck3",
-		        "locationName": "Hamtramck",
-		        "actionsTaken": [],
-		        "time": "2013-01-22 10:24:59+01",
-		        "color": "green",
-		        "law": "Public Act 436",
-		        'marker-size': 'large',
-        		'marker-color': '#BE9A6B',
-        		'marker-symbol': 'cafe'
-		    }
-		},
-		{
-		    "type": "Feature",
-		    "geometry": {
-		        "type": "Point",
-		        "coordinates": bentonHarborCoordinates
-		    },
-		    "properties": {
-		        "name": "bentonHarbor2",
-		        "locationName": "Benton Harbor",
-		        "actionsTaken": [],
-		        "time": "2013-01-22 10:24:59+01",
-		        "color": "green",
-		        "law": "Public Act 436",
-		        'marker-size': 'large',
-        		'marker-color': '#BE9A6B',
-        		'marker-symbol': 'cafe'
-		    }
-		}]
-	};
 
-	L.mapbox.accessToken = 'pk.eyJ1Ijoic2hhd25vYWtsZXkiLCJhIjoiY2lrZzVzbGxmMDAyb3Y2bHlhaTNyZnN4eCJ9.5TE4YM7J3mhjIlnu-pLmLA';
+var myLayer = L.mapbox.featureLayer().setFilter(function(feature) {
+  return filterObject.selectedStatutes.includes(feature.properties.law) && filterObject.selectedConsequences.some(function(consequence) {
+	  		return feature.properties.consequences.indexOf(consequence) >= 0;
+	  });
+}).addTo(map);
 
-	L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png?access_token={accessToken}', {
-	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-	    maxZoom: 18,
-	    id: 'mapbox.satellite',
-	    accessToken: 'pk.eyJ1Ijoic2hhd25vYWtsZXkiLCJhIjoiY2lrZzVzbGxmMDAyb3Y2bHlhaTNyZnN4eCJ9.5TE4YM7J3mhjIlnu-pLmLA'
-	}).addTo(map);
+var updateFilter = function() {
+	myLayer.setFilter(function(feature) {
+	  return filterObject.selectedStatutes.includes(feature.properties.law) && filterObject.selectedConsequences.some(function(consequence) {
+	  		return feature.properties.consequences.indexOf(consequence) >= 0;
+	  });
+	});
+};
+
+
+
+L.mapbox.accessToken = 'pk.eyJ1Ijoic2hhd25vYWtsZXkiLCJhIjoiY2lrZzVzbGxmMDAyb3Y2bHlhaTNyZnN4eCJ9.5TE4YM7J3mhjIlnu-pLmLA';
+
+L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.satellite',
+    accessToken: 'pk.eyJ1Ijoic2hhd25vYWtsZXkiLCJhIjoiY2lrZzVzbGxmMDAyb3Y2bHlhaTNyZnN4eCJ9.5TE4YM7J3mhjIlnu-pLmLA'
+}).addTo(map);
 
 // http://stackexchange.vd-zr.ru/questions/178876/speeding-up-large-geojsons-in-leaflet-maps?&d=gis
 
@@ -403,52 +414,108 @@ myLayer.on('click', function(e) {
 // https://www.mapbox.com/mapbox.js/api/v2.1.5/l-mapbox-featurelayer/#section-featurelayer-setfilter
 var addToStatuteArray = function(string, statuteArray) {
 	statuteArray.push(string);
-}
+};
 
-// Using updateStatuteFilter method to clear markers based on presence of statute in checked boxes
+var addToConsequencesArray = function(string, consequencesArray) {
+	consequencesArray.push(string);
+};
+
+// Using updateFilter method to clear markers based on presence of statute in checked boxes
     $('#PA4-checkbox').change(function(){
     	if ($(this).is(':checked')) {
-    		addToStatuteArray("Public Act 4", selectedStatuteArray)
-    		// selectedStatuteArray.push("Public Act 4");
-    		// generateMarkersByStatutes(selectedStatuteArray, completeFeatureCollection, currentLayer);
+    		addToStatuteArray("Public Act 4", filterObject.selectedStatutes)
     	} else {
-    		selectedStatuteArray = _.filter(selectedStatuteArray, function(statute){
+    		filterObject.selectedStatutes = _.filter(filterObject.selectedStatutes, function(statute){
     			return statute != "Public Act 4";
     		});
-    		// generateMarkersByStatutes(selectedStatuteArray, completeFeatureCollection, currentLayer);
     	}
-    	updateStatuteFilter();
+    	updateFilter();
     });
     $('#PA436-checkbox').change(function(){
-    	console.log(selectedStatuteArray)
     	if ($(this).is(':checked')) {
-    		addToStatuteArray("Public Act 436", selectedStatuteArray)
-    		// selectedStatuteArray.push("Public Act 436");
-    		// generateMarkersByStatutes(selectedStatuteArray, completeFeatureCollection, currentLayer);
+    		addToStatuteArray("Public Act 436", filterObject.selectedStatutes)
     	} else {
-    		selectedStatuteArray = _.filter(selectedStatuteArray, function(statute){
+    		filterObject.selectedStatutes = _.filter(filterObject.selectedStatutes, function(statute){
     			return statute != "Public Act 436";
     		});
-    		// generateMarkersByStatutes(selectedStatuteArray, completeFeatureCollection, currentLayer);
     	}
-    	updateStatuteFilter();
+    	updateFilter();
     });
 
     $('#PA101-checkbox').change(function(){
     	if ($(this).is(':checked')) {
-    		addToStatuteArray("Public Act 101", selectedStatuteArray);
-    		// selectedStatuteArray.push("Public Act 101");
-    		// generateMarkersByStatutes(selectedStatuteArray, completeFeatureCollection, currentLayer);
+    		addToStatuteArray("Public Act 101", filterObject.selectedStatutes);
     	} else {
-    		selectedStatuteArray = _.filter(selectedStatuteArray, function(statute){
+    		filterObject.selectedStatutes = _.filter(filterObject.selectedStatutes, function(statute){
     			return statute != "Public Act 101";
     		});
-    		// generateMarkersByStatutes(selectedStatuteArray, completeFeatureCollection, currentLayer);
     	}
 
-    	updateStatuteFilter();
-
+    	updateFilter();
     });
+
+    $('#school-checkbox').change(function(){
+    	if ($(this).is(':checked')) {
+    		addToConsequencesArray("schools", filterObject.selectedConsequences);
+    	} else {
+    		filterObject.selectedConsequences = _.filter(filterObject.selectedConsequences, function(statute){
+    			return statute != "schools";
+    		});
+    	}
+
+    	updateFilter();
+    });
+// var selectedConsequenceArray = ["schools","pensions","socialServices", "policeFire", "layoffs"]
+
+
+    $('#pension-checkbox').change(function(){
+    	if ($(this).is(':checked')) {
+    		addToConsequencesArray("pensions", filterObject.selectedConsequences);
+    	} else {
+    		filterObject.selectedConsequences = _.filter(filterObject.selectedConsequences, function(statute){
+    			return statute != "pensions";
+    		});
+    	}
+
+    	updateFilter();
+    });
+
+    $('#social-services-checkbox').change(function(){
+    	if ($(this).is(':checked')) {
+    		addToConsequencesArray("socialServices", filterObject.selectedConsequences);
+    	} else {
+    		filterObject.selectedConsequences = _.filter(filterObject.selectedConsequences, function(statute){
+    			return statute != "socialServices";
+    		});
+    	}
+
+    	updateFilter();
+    });
+
+    $('#layoffs-checkbox').change(function(){
+    	if ($(this).is(':checked')) {
+    		addToConsequencesArray("layoffs", filterObject.selectedConsequences);
+    	} else {
+    		filterObject.selectedConsequences = _.filter(filterObject.selectedConsequences, function(statute){
+    			return statute != "layoffs";
+    		});
+    	}
+
+    	updateFilter();
+    });
+
+    $('#police-fire-checkbox').change(function(){
+    	if ($(this).is(':checked')) {
+    		addToConsequencesArray("policeFire", filterObject.selectedConsequences);
+    	} else {
+    		filterObject.selectedConsequences = _.filter(filterObject.selectedConsequences, function(statute){
+    			return statute != "policeFire";
+    		});
+    	}
+
+    	updateFilter();
+    });
+
 
 </script>
 </body>
