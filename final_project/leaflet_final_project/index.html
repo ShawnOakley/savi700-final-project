@@ -6,11 +6,13 @@
 
 <!-- <link rel="stylesheet" type="text/css" href="./css/custom-theme/jquery-ui-1.9.2.custom.css"> -->
 <link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 
 <script src="./dist/jquery-ui.js"></script>
 <script src="./dist/leaflet.SliderControl.min.js"></script>
 <script src="./dist/bouncemarker.js"></script>
-
+<link href='https://fonts.googleapis.com/css?family=Tienne:900|Eczar:800' rel='stylesheet' type='text/css'>
 
 <script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
@@ -29,53 +31,99 @@
 </head>
 
 <body>
-<div id="splashscreen">
-	    <h2>Test splashscreen</h2>
 
-	    <a href="#" class="btn enter_link" id="btn-splash">Investigate Further</a>
-</div>
-<div class="row map-background">
-	<div class="col-md-2" id="select-menu">
-	<div class="checkbox-container">
-		<nav id='filters' class='filter-ui'></nav>
-		<div class="checkbox-div">
-		  <input type="checkbox" class="checkbox-law" id="PA101-checkbox" value=""><label for="PA101-checkbox">Public Act 101 of 1988</label>
-		</div><span>  </span>
-		<div class="checkbox-div">
-		  <input type="checkbox" class="checkbox-law" id="PA4-checkbox" value=""><label for="PA4-checkbox">Public Act 4 of 2011</label>
-		</div><span>  </span>
-		<div class="checkbox-div">
-		  <input type="checkbox" class="checkbox-law" id="PA436-checkbox" value=""><label for="PA436-checkbox">Public Act 436 of 2012</label>
+<div class="map-background">
+	<div id="splashscreen">
+		    <h2 id="splashscreen-header">Emergency Financial Managers and Michigan</h2>
+		    <div id="splashscreen-text"> Here is some text explaining the situation</div>
+
+		    <a href="#" class="btn enter_link" id="btn-splash">Investigate Further</a>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3" id="key-panel">
+			<!-- <h4 id="key-heading"><u><b>LEGEND</b></u></h4> -->
+			<h4 id="key-heading"><u>LEGEND</u></h4>
+				<div class="row">
+					<div class="symbol-legends col-md-7">
+						<div class="symbol-column container">
+							<div class="row symbol-container">
+								<i class="fa fa-scissors fa-lg"></i><div class="symbol-label"><span>  </span> Layoffs</div>
+							</div>
+							<div class="row symbol-container">
+								<i class="fa fa-credit-card fa-lg"></i><div class="symbol-label"> <span>  </span> Pensions Defunded</div>
+							</div>
+							<div class="row symbol-container">
+								<i class="fa fa-tint fa-lg"></i><div class="symbol-label"> <span>  </span> Municipal Services</div>
+							</div>
+							<div class="row symbol-container">
+								<i class="fa fa-graduation-cap fa-lg"></i><div class="symbol-label"> <span>  </span> Schools Closed</div>
+							</div>
+							<div class="row symbol-container">
+								<i class="fa fa-user fa-lg"></i><div class="symbol-label"> <span>  </span> Police/Firemen related</div>
+							</div>
+						</div>
+					</div>
+					<div class="color-legends col-md-3">
+							<div class="row color-container">
+								<div class="color-box" id="brown"></div><div class="color-label"><span>  </span>Public Act 101</div>
+							</div>
+							<div class="row color-container">
+								<div class="color-box" id="dark-grey"></div><div class="color-label"><span>  </span>Public Act 4</div>
+							</div>
+							<div class="row color-container">
+								<div class="color-box" id="forest-green"></div><div class="color-label"><span>  </span>Public Act 436</div>
+							</div>
+					</div>
+				</div>
 		</div>
-	</div>
-	<div class="info-container">
-		<div id='info' class='info'></div>
-	</div>
-	<div class="checkbox-container">
-		<h4><u>Actions Taken</u></h4>
-		<div class="checkbox-div">
-		  <input type="checkbox" class="checkbox-consequences" id="school-checkbox" value=""><label for="school-checkbox">Schools Closed</label>
-		</div><span>  </span>
-		<div class="checkbox-div">
-		  <input type="checkbox" class="checkbox-consequences" id="pension-checkbox" value=""><label for="pension-checkbox">Pensions Defunded</label>
-		</div><span>  </span>
-		<div class="checkbox-div">
-		  <input type="checkbox" class="checkbox-consequences" id="social-services-checkbox" value=""><label for="social-services-checkbox">Municipal Services Defunded/Outsourced</label>
-		</div><span>  </span>
-		<div class="checkbox-div">
-		  <input type="checkbox" class="checkbox-consequences" id="layoffs-checkbox" value=""><label for="layoffs-checkbox">Municipal Staff Layoffs</label>
-		</div><span>  </span>
-		<div class="checkbox-div">
-		  <input type="checkbox" class="checkbox-consequences" id="police-fire-checkbox" value=""><label for="police-fire-checkbox">Police/Fire Department Reduced or Eliminated</label>
-		</div><span>  </span>
-	</div>
-	<div class="slider-container">
-		<p>
-		  <label for="year">Date range:</label>
-		  <input type="text" id="year" readonly>
-		</p>
-		 
-		<div id="slider-range"></div>
+		<div class="col-md-9" id="select-menu">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="checkbox-container">
+						<div class="checkbox-div">
+							
+							<h4><u>Legal Basis for Actions Taken</u></h4>
+							
+							<label for="PA101-checkbox">Public Act 101 of 1988<span>  </span><input type="checkbox" class="checkbox-law" id="PA101-checkbox" value=""></label></div><span> | </span>
+							
+							<div class="checkbox-div"><label for="PA4-checkbox">Public Act 4 of 2011<span>  </span><input type="checkbox" class="checkbox-law" id="PA4-checkbox" value=""></label></div><span> | </span>
+							
+							<div class="checkbox-div"><label for="PA436-checkbox">Public Act 436 of 2012<span>  </span><input type="checkbox" class="checkbox-law" id="PA436-checkbox" value=""></label>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="slider-container">
+						<p>
+						  <label for="year">Date range:</label>
+						  <input type="text" id="year" readonly>
+						</p>
+						 
+						<div id="slider-range"></div>
+					</div>
+				</div>
+			</div>
+			<div class="checkbox-container">
+				<h4><u>Actions Taken</u></h4>
+				<div class="checkbox-div">
+				  <label for="school-checkbox">Schools Closed<span>  </span><input type="checkbox" class="checkbox-consequences" id="school-checkbox" value=""></label>
+				</div><span> | </span>
+				<div class="checkbox-div">
+				  <label for="pension-checkbox">Pensions Defunded<span>  </span><input type="checkbox" class="checkbox-consequences" id="pension-checkbox" value=""></label>
+				</div><span> | </span>
+				<div class="checkbox-div">
+				  <label for="social-services-checkbox">Municipal Services Defunded/Outsourced<span>  </span><input type="checkbox" class="checkbox-consequences" id="social-services-checkbox" value=""></label>
+				</div><span> | </span>
+				<div class="checkbox-div">
+				  <label for="layoffs-checkbox">Municipal Staff Layoffs<span>  </span><input type="checkbox" class="checkbox-consequences" id="layoffs-checkbox" value=""></label>
+				</div><span> | </span>
+				<div class="checkbox-div">
+				  <label for="police-fire-checkbox">Police/Fire Department Reduced or Eliminated<span>  </span><input type="checkbox" class="checkbox-consequences" id="police-fire-checkbox" value=""></label>
+				</div><span>  </span>
+			</div>
+		</div>
 	</div>
 <!-- Need to add heat maps on demographics -->
 <!-- Need to add d3 graphs on demographics -->
@@ -84,9 +132,13 @@
 <!-- Maybe graph looking at state overage during this time, see below -->
 <!-- http://www.governing.com/topics/mgmt/gov-emergency-financial-managers-michigan-municipalities-unwelcome-savior.html -->
 <!-- Some even blame Michigan for inflicting some of the pain Pontiac and other distressed cities are now experiencing. In early 2011, while promoting PA4, Snyder simultaneously advanced a budget eliminating one-third of the state revenue sharing set aside for localities -- about $307 million. That was on top of the $4 billion in state revenue that localities had lost over the last decade. While Pontiac struggles, the state ended last fiscal year with a reported $457 million surplus. That disparity has prompted some residents and elected officials to openly question whether Snyder’s budget, in concert with PA4, is an attempt by state leaders to systematically dismantle urban communities and promote a regionalized approach that favors counties. Schimmel’s immediate predecessor, Michael Stampfler, had suggested that the city consider filing for bankruptcy or being absorbed by Oakland County. The idea infuriated many residents, who viewed it as the state giving up on Pontiac. -->
-	</div>
-	<div class="col-md-10" id="display-panel">
-		<div id="map"></div>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="map-panel" id="map"></div>
+		</div>
+		<div class="col-md-4">
+			<div class="details-panel" id="details"></div>
+		</div>
 	</div>
 </div>
 
@@ -284,7 +336,7 @@ var completeFeatureCollection = {
 	        "year": 2012,
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
-    		'marker-color': '#ABB7B7',
+    		'marker-color': '#878F5A',
     		'marker-symbol':'police'
 	    }
 	},
@@ -301,7 +353,7 @@ var completeFeatureCollection = {
 	        "year": 2012,
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
-    		'marker-color': '#ABB7B7',
+    		'marker-color': '#878F5A',
     		'marker-symbol':'bank'
 	    }
 	},
@@ -318,7 +370,7 @@ var completeFeatureCollection = {
 	        "year": 2012,
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
-    		'marker-color': '#ABB7B7',
+    		'marker-color': '#878F5A',
     		'marker-symbol':'hairdresser'
 	    }
 	},
@@ -336,7 +388,7 @@ var completeFeatureCollection = {
 	        "color": "green",
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
-    		'marker-color': '#ABB7B7',
+    		'marker-color': '#878F5A',
     		'marker-symbol':'police'
 	    }
 	},
@@ -354,7 +406,7 @@ var completeFeatureCollection = {
 	        "color": "green",
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
-    		'marker-color': '#ABB7B7',
+    		'marker-color': '#878F5A',
     		'marker-symbol':'water'
 	    }
 	}]
@@ -371,7 +423,7 @@ var completeFeatureCollection = {
 
 // https://stackoverflow.com/questions/16537326/leafletjs-how-to-remove-the-zoom-control
 // Set zoomControl to true when splash screen closes
-var map = L.map('map', {zoomControl: false}).setView([43.01,-83.69], 8);
+var map = L.map('map', {zoomControl: false}).setView([42.5,-84.5], 7);
 
 
 $(document).ready(function(){
@@ -436,9 +488,12 @@ var updateFilter = function() {
 	  }) && (feature.properties.year >= filterObject.selectedYearRange[0] && feature.properties.year <= filterObject.selectedYearRange[1]);
 	});
 };
-
-
-L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png?access_token={accessToken}', {
+// https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png?access_token={accessToken}
+// https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png?access_token={accessToken}
+// https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lines/{z}/{x}/{y}.png?access_token={accessToken}
+// https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png?access_token={accessToken}
+// https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png?access_token={accessToken}
+L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox.satellite',
@@ -447,7 +502,7 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png?acc
 
 // https://www.mapbox.com/mapbox.js/example/v1.0.0/marker-tooltips-outside-map/
 
-var info = document.getElementById('info');
+var info = document.getElementById('details');
 
 function empty() {
   info.innerHTML = '<div><strong>Click a marker</strong></div>';
@@ -461,13 +516,33 @@ myLayer.on('click',function(e) {
     e.layer.closePopup();
 
     var feature = e.layer.feature;
-    var content = '<div><strong> City: ' + feature.properties.locationName + '</strong>' +
-                  '<p> Legal basis: ' + feature.properties.law + '</p></div>';
+    var content = '<h3>'+'Event Details'+'</h3>'+'<div><strong> City: ' + feature.properties.locationName + '</strong>' + '<p><div>Legal basis: ' + feature.properties.law + '</div></p>'+'<p><div>Year: ' + feature.properties.year + '</div></p>'+'<p><div>Action taken: ' + feature.properties.consequences + '</div></p>'+'<p><div>Description: ' + 'This is where the description goes.' + '</div></p>'+'</div>'+"<button style='color:black' id='back-button'>Back</button>";
 
     info.innerHTML = content;
-    console.log(info)
     $(info).show();
+    $('#back-button').on('click', function(){
+	updateFromSplashIntro();
 });
+
+});
+
+var updateFromSplashIntro = function(){
+	var content ='<h3>'+$('#splashscreen-header').text()+'</h3><div><strong>'+$('#splashscreen-text').text()+'</strong></div>';
+	var info = document.getElementById('details');
+	console.log(info)
+	console.log(content);
+	info.innerHTML=content;
+	$(info).show();
+}
+
+$('#btn-splash').on('click', function(){
+	updateFromSplashIntro();
+});
+
+$('#back-button').on('click', function(){
+	updateFromSplashIntro();
+});
+
 
 // Clear the tooltip when map is clicked.
 map.on('move', empty);

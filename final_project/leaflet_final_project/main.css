@@ -1,20 +1,100 @@
 #select-menu {
-	margin:15px;
-	border-style: solid;
-    border-width: 1px;
-    border-color: white;
-   	width:90%;
-   	display:inline;
+	border-left: 1px solid white;
+	border-bottom: 1px solid white;
+    height:160px;
+	font-family: 'Ezcar';
 }
 
-#display-panel {
+/*https://stackoverflow.com/questions/2570972/css-font-border*/
+#key-panel {
+	border-right: 1px solid white; 
+	border-bottom: 1px solid white;
+	height:160px; 
+	background:black;
+	/*background: #95A5A6;*/
+	font-family: 'Tienne';
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+#splashscreen{
+	font-family: 'Ezcar';
+}
+
+#key-heading{
+	text-align: center;
+}
+
+.color-container {
+	margin-bottom: 5px;
+	display:inline-block;
+}
+
+.symbol-container {
+	padding-left:10px;
+	margin-bottom: 8px;
+}
+
+.color-label {
+	font-family: 'Ezcar';
+	font-size: 10;
+	display:inline-block;
+	padding-bottom: 5px;
+	line-height: 10px;
+	padding-left:2px;
+}
+
+.symbol-label {
+	font-family: 'Ezcar';
+	font-size: 12;
+	display:inline-block;
+	padding-bottom: 5px;
+	line-height: 10px;
+	padding-left:4px;
+}
+
+.color-box {
+	height:15px;
+	width:15px;
+	border:1px solid white;
+	display:inline-block;
+}
+
+#dark-grey {
+	background-color: #6C7A89;
+}
+
+#forest-green {
+	background-color: #878F5A;
+}
+
+#brown {
+	background-color: #BE9A6B;
+}
+
+/*#key-panel:before {
+  content: " ";
+  position: absolute;
+  z-index: -1;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 5px solid black;
+}*/
+
+.map-panel {
 	width:100%;
+}
+
+.details-panel {
+	color:white;
+	font-family: 'Ezcar';
 }
 
 #map { 
-	height:100%;
+	height:70%;
 	width:100%;
-	margin:5px;
 }
 
 .button-container {
@@ -35,10 +115,28 @@
 	background-color:white;
 }
 
+#back-button {
+	color:black;
+}
+
 .map-background {
 	height:100%;
 	background-color:black;
 }
+
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
 
 .leaflet-popup-content {
 	color:black;
@@ -57,18 +155,9 @@
     display:none;
 }
 
-/*#splash-backdrop {
-    width: 50%;
-     Set the margin-left and margin-right automatically set 
-    margin: 0 auto; 
-	height:200px;
-	background-color:black;
-}*/
+/*https://css-tricks.com/snippets/css/multiple-borders/*/
 
-/*#splash-backdrop:hover {
 
-    opacity:1.0;
-}*/
 
 .checkbox-container {
 	display:inline-block;
@@ -78,6 +167,8 @@
 .slider-container {
 	display:inline-block;
 	color:white;
+	padding-right:20px;
+	padding-top: 15px;
 }
 
 .info-container {
