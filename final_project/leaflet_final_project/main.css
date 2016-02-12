@@ -19,6 +19,7 @@
 
 #splashscreen{
 	font-family: 'Ezcar';
+	text-align: center;
 }
 
 #key-heading{
@@ -152,6 +153,12 @@
     color:white;
     z-index:1000;
     display:none;
+}
+
+#splashscreen-text{
+	text-align: left;
+	padding-left: 10%;
+	padding-right: 10%;
 }
 
 /*https://css-tricks.com/snippets/css/multiple-borders/*/

@@ -35,7 +35,7 @@
 <div class="map-background">
 	<div id="splashscreen">
 		    <h2 id="splashscreen-header">Emergency Financial Managers and Michigan</h2>
-		    <div id="splashscreen-text"> Here is some text explaining the situation</div>
+		    <div id="splashscreen-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</div>
 
 		    <a href="#" class="btn enter_link" id="btn-splash">Investigate Further</a>
 	</div>
@@ -516,7 +516,7 @@ myLayer.on('click',function(e) {
     e.layer.closePopup();
 
     var feature = e.layer.feature;
-    var content = '<h3>'+'Event Details'+'</h3>'+'<div><strong> City: ' + feature.properties.locationName + '</strong>' + '<p><div>Legal basis: ' + feature.properties.law + '</div></p>'+'<p><div>Year: ' + feature.properties.year + '</div></p>'+'<p><div>Action taken: ' + feature.properties.consequences + '</div></p>'+'<p><div>Description: ' + 'This is where the description goes.' + '</div></p>'+'</div>'+"<button style='color:black' id='back-button'>Back</button>";
+    var content = '<h3>'+'Event Details'+'</h3>'+'<div><strong> City: ' + feature.properties.locationName + '</strong>' + '<p><div>Legal basis: ' + feature.properties.law + '</div></p>'+'<p><div>Year: ' + feature.properties.year + '</div></p>'+'<p><div>Action taken: ' + feature.properties.consequences + '</div></p>'+'<p><div>Description: ' + 'This is where the description goes.' + '</div></p>'+'<p><div>Source: ' + 'Link to article or source identifying the event.' + '</div></p>'+'</div>'+"<button style='color:black' id='back-button'>Back</button>";
 
     info.innerHTML = content;
     $(info).show();
@@ -529,8 +529,6 @@ myLayer.on('click',function(e) {
 var updateFromSplashIntro = function(){
 	var content ='<h3>'+$('#splashscreen-header').text()+'</h3><div><strong>'+$('#splashscreen-text').text()+'</strong></div>';
 	var info = document.getElementById('details');
-	console.log(info)
-	console.log(content);
 	info.innerHTML=content;
 	$(info).show();
 }
@@ -545,11 +543,11 @@ $('#back-button').on('click', function(){
 
 
 // Clear the tooltip when map is clicked.
-map.on('move', empty);
+// map.on('move', updateFromSplashIntro);
 
 // Trigger empty contents when the script
 // has loaded on the page.
-empty();
+updateFromSplashIntro();
 
 // https://www.mapbox.com/mapbox.js/api/v2.1.5/l-mapbox-featurelayer/#section-featurelayer-setfilter
 var addToStatuteArray = function(string, statuteArray) {
