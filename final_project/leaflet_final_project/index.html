@@ -12,6 +12,7 @@
 <script src="./dist/jquery-ui.js"></script>
 <script src="./dist/leaflet.SliderControl.min.js"></script>
 <script src="./dist/bouncemarker.js"></script>
+<script src="./dist/oms.min.js"></script>
 <link href='https://fonts.googleapis.com/css?family=Tienne:900|Eczar:800' rel='stylesheet' type='text/css'>
 
 <script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
@@ -35,8 +36,43 @@
 <div class="map-background">
 	<div id="splashscreen">
 		    <h2 id="splashscreen-header">Emergency Financial Managers and Michigan</h2>
-		    <div id="splashscreen-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</div>
+		    <div id="splashscreen-text">
 
+		    "When a city or a school district in Michigan runs out of money, the state can appoint an emergency manager to take over the responsibilities of locally elected officials. An emergency manger's powers are broad ... and are designed to help EMs balance the books and return governance to locally elected officials as quickly as possible.
+		    ...
+		    An emergency manager can:
+		    <ol>
+				<li>Hire/fire local government employees</li>
+				<li>Renegotiate, terminate, modify labor contracts with state treasury approval</li>
+				<li>Sell, lease, or privatize local assets with state treasury approval</li>
+				<li>Revise contract obligations</li>
+				<li>Change local budgets without local legislative approval</li>
+				<li>Initiate municipal bankruptcy proceedings</li>
+				<li>Hire support staff</li>
+				<li>An emergency manager cannot raise taxes.</li>
+			</ol>
+
+			Michigan's emergency management system has been in place since 1988, when Public Act 101 allowed an emergency financial manager to assess and manage the finances of Hamtramck.
+
+			PA 101 was strengthened in 1990, when Public Act 72 gave state government the power to appoint 'emergency financial managers' to local government units-such as towns, school districts, or counties-nearing bankruptcy.
+
+			Emergency financial managers became 'emergency managers' when their powers were strengthened by Public Act 4 in 2011.
+
+			The more powerful emergency managers (EMs) can now strip locally elected officials of their power and they can renegotiate, alter, or void union contracts before they expire."
+
+<br>
+<br>
+http://michiganradio.org/post/7-things-know-about-michigans-emergency-manager-law#stream/0
+<br>
+<br>
+
+		    "[Since the passage of Public Act 436,] financial managers have continued to shut down fire departments, outsource police departments, sell off parking meters and public parks. In Flint, the manager even auctioned off the plastic Santa Claus that once adorned city hall, setting the initial bidding price at $5.  And here's one fact of life in Michigan: emergency management is normally only imposed on majority-black cities. From 2013 to 2014, 52% of the African American residents in the state lived under emergency management, compared to only 2% of white residents."
+<br>
+<br>
+https://www.salon.com/2015/06/12/something_is_rotten_in_michigan_poisoned_water_supplied_dissolved_school_districts_and_a_massive_unraveling_of_american_democracy_partner/</div>
+
+<br>
+<br>
 		    <a href="#" class="btn enter_link" id="btn-splash">Investigate Further</a>
 	</div>
 
@@ -51,7 +87,7 @@
 								<i class="fa fa-scissors fa-lg"></i><div class="symbol-label"><span>  </span> Layoffs</div>
 							</div>
 							<div class="row symbol-container">
-								<i class="fa fa-credit-card fa-lg"></i><div class="symbol-label"> <span>  </span> Pensions Defunded</div>
+								<i class="fa fa-credit-card fa-lg"></i><div class="symbol-label"> <span>  </span> Pensions/Financial scandal</div>
 							</div>
 							<div class="row symbol-container">
 								<i class="fa fa-tint fa-lg"></i><div class="symbol-label"> <span>  </span> Municipal Services</div>
@@ -146,26 +182,49 @@
 
 L.mapbox.accessToken = 'pk.eyJ1Ijoic2hhd25vYWtsZXkiLCJhIjoiY2lrZzVzbGxmMDAyb3Y2bHlhaTNyZnN4eCJ9.5TE4YM7J3mhjIlnu-pLmLA';
 
-var hamtramckCoordinates = [-83.0572, 42.3978];
-var hamtramck2Coordinates = [-83, 42.3978];
-var hamtramck3Coordinates = [-83.0572, 42.1];
+	var randRange = function(){
+	    return Math.random() * (.075 - -0.075) + -0.075;
+	}
 
-var highlandParkCoordinates = [-83.1017, 42.4036];
-var highlandPark2Coordinates = [-83, 42.4036];
+var hamtramckCoordinates = function(){
+	return [-83.0572 + randRange(), 42.3978+ randRange()];
+}
 
-var flintCoordinates = [-83.69, 43.01];
-var flint2Coordinates = [-83.6, 43];
+var highlandParkCoordinates = function(){
+	return [-83.1017 + randRange(), 42.4036 + randRange()];
+};
 
-var threeOaksCoordinates = [-86.6106, 41.7986];
-var detroitCoordinates = [-83.0458, 42.3314];
-var ecorseCoordinates = [-83.1458, 42.2444];
+var flintCoordinates = function(){
+	return [-83.69 + randRange(), 43.01 + randRange()];
+};
 
-var bentonHarborCoordinates = [-86.4483,42.1111];
-var bentonHarbor2Coordinates = [-86.3,42.05];
+var threeOaksCoordinates = function(){
+	return [-86.6106 + randRange(), 41.7986 + randRange()];
+};
 
-var pontiacCoordinates = [-83.2925, 42.6461];
-var muskegonHeightsCoordinates = [-86.2389, 43.2011];
-var allenParkCoordinates = [-86.4483, 42.1111];
+var detroitCoordinates = function(){
+	return [-83.0458 + randRange(), 42.3314 + randRange()];
+};
+
+var ecorseCoordinates = function(){
+	return [-83.1458 + randRange(), 42.2444 + randRange()];
+};
+
+var bentonHarborCoordinates = function(){
+	return [-86.4483 + randRange(),42.1111 + randRange()];
+};
+
+var pontiacCoordinates = function(){
+	return [-83.2925 + randRange(), 42.6461 + randRange()]
+};
+
+var muskegonHeightsCoordinates = function(){
+	return [-86.2389 + randRange(), 43.2011 + randRange()]
+};
+
+var allenParkCoordinates = function(){
+	return [-86.4483 + randRange(), 42.1111 + randRange()];
+};
 
 var completeFeatureCollection = {
 	"type": "FeatureCollection",
@@ -174,211 +233,30 @@ var completeFeatureCollection = {
 	    "type": "Feature",
 	    "geometry": {
 	        "type": "Point",
-	        "coordinates": hamtramckCoordinates
+	        "coordinates": hamtramckCoordinates()
 	    },
 	    "properties": {
 	        "name": "hamtramck1",
-	        "locationName": "Hamtramck",
-	        "consequences": ["schools", "socialServices"],
-	        "year": 1988,
-	        "law": "Public Act 101",
-	        'marker-size': 'large',
-    		'marker-color': '#BE9A6B',
-    		'marker-symbol': 'college'
-	    }
-	},
-	{
-	    "type": "Feature",
-	    "geometry": {
-	        "type": "Point",
-	        "coordinates": hamtramck2Coordinates
-	    },
-	    "properties": {
-	        "name": "hamtramck2",
 	        "locationName": "Hamtramck",
 	        "consequences": ["socialServices"],
 	        "year": 2000,
 	        "law": "Public Act 101",
 	        'marker-size': 'large',
     		'marker-color': '#BE9A6B',
-    		'marker-symbol': 'water'
+    		'marker-symbol': "police",
+    		'description': 'Comprehensive privatization of city services and sell-off of city assets.',
+    		'source': 'https://www.wsws.org/en/articles/2013/06/06/detr-j06.html',
+    		'EFM': {
+    			'name':'Louis Schimmel',
+    			'bio':'needs website'
+    		}
 	    }
 	},
 	{
 	    "type": "Feature",
 	    "geometry": {
 	        "type": "Point",
-	        "coordinates": highlandParkCoordinates
-	    },
-	    "properties": {
-	        "name": "highLandPark1",
-	        "locationName": "Highland Park",
-	        "consequences": ["pensions"],
-	        "year": 2000,
-	        "law": "Public Act 101",
-	        'marker-size': 'large',
-    		'marker-color': '#BE9A6B',
-    		'marker-symbol':'bank'
-	    }
-	},
-	{
-	    "type": "Feature",
-	    "geometry": {
-	        "type": "Point",
-	        "coordinates": flintCoordinates
-	    },
-	    "properties": {
-	        "name": "flint1",
-	        "locationName": "Flint",
-	        "consequences": ["layoffs"],
-	        "year": 2002,
-	        "law": "Public Act 101",
-	        'marker-size': 'large',
-    		'marker-color': '#BE9A6B',
-    		'marker-symbol':'hairdresser'
-	    }
-	},
-	{
-	    "type": "Feature",
-	    "geometry": {
-	        "type": "Point",
-	        "coordinates": threeOaksCoordinates
-	    },
-	    "properties": {
-	        "name": "threeOaks1",
-	        "locationName": "Three Oaks",
-	        "consequences": ["policeFire"],
-	        "year": 2008,
-	        "law": "Public Act 101",
-	        'marker-size': 'large',
-    		'marker-color': '#BE9A6B',
-    		'marker-symbol':'police'
-	    }
-	},
-	{
-	    "type": "Feature",
-	    "properties": {
-	        "name": "detroit1",
-	        "locationName": "Detroit",
-	        "consequences": ["schools"],
-	        "year": 2009,
-	        "law": "Public Act 101",
-	        'marker-size': 'large',
-    		'marker-color': '#BE9A6B',
-    		'marker-symbol':'college'
-	    },
-	    "geometry": {
-	        "type": "Point",
-	        "coordinates": detroitCoordinates
-	    }
-	},
-	{
-	    "type": "Feature",
-	    "geometry": {
-	        "type": "Point",
-	        "coordinates": bentonHarborCoordinates
-	    },
-	    "properties": {
-	        "name": "bentonHarbor",
-	        "locationName": "Benton Harbor",
-	        "consequences": ["pensions"],
-	        "year": 2010,
-	        "law": "Public Act 4",
-	        'marker-size': 'large',
-    		'marker-color': '#6C7A89',
-    		'marker-symbol':'bank'
-	    }
-	},
-	{
-	    "type": "Feature",
-	    "geometry": {
-	        "type": "Point",
-	        "coordinates": pontiacCoordinates
-	    },
-	    "properties": {
-	        "name": "pontiacHarbor",
-	        "locationName": "Pontiac",
-	        "consequences": ["layoffs"],
-	        "year": 2010,
-	        "law": "Public Act 4",
-	        'marker-size': 'large',
-    		'marker-color': '#6C7A89',
-    		'marker-symbol':'hairdresser'
-	    }
-	},
-	{
-	    "type": "Feature",
-	    "geometry": {
-	        "type": "Point",
-	        "coordinates": flint2Coordinates
-	    },
-	    "properties": {
-	        "name": "flint2",
-	        "locationName": "Flint",
-	        "consequences": ["schools"],
-	        "year": 2011,
-	        "law": "Public Act 4",
-	        'marker-size': 'large',
-    		'marker-color': '#6C7A89',
-    		'marker-symbol':'college'
-	    }
-	},
-	{
-	    "type": "Feature",
-	    "geometry": {
-	        "type": "Point",
-	        "coordinates": highlandPark2Coordinates
-	    },
-	    "properties": {
-	        "name": "highlandPark2",
-	        "locationName": "Highland Park",
-	        "consequences": ["policeFire"],
-	        "year": 2012,
-	        "law": "Public Act 436",
-	        'marker-size': 'large',
-    		'marker-color': '#878F5A',
-    		'marker-symbol':'police'
-	    }
-	},
-	{
-	    "type": "Feature",
-	    "geometry": {
-	        "type": "Point",
-	        "coordinates": muskegonHeightsCoordinates
-	    },
-	    "properties": {
-	        "name": "muskegonHeights1",
-	        "locationName": "Muskegon Heights",
-	        "consequences": ["pensions"],
-	        "year": 2012,
-	        "law": "Public Act 436",
-	        'marker-size': 'large',
-    		'marker-color': '#878F5A',
-    		'marker-symbol':'bank'
-	    }
-	},
-	{
-	    "type": "Feature",
-	    "geometry": {
-	        "type": "Point",
-	        "coordinates": allenParkCoordinates
-	    },
-	    "properties": {
-	        "name": "allenPark1",
-	        "locationName": "Allen Park",
-	        "consequences": ["layoffs"],
-	        "year": 2012,
-	        "law": "Public Act 436",
-	        'marker-size': 'large',
-    		'marker-color': '#878F5A',
-    		'marker-symbol':'hairdresser'
-	    }
-	},
-	{
-	    "type": "Feature",
-	    "geometry": {
-	        "type": "Point",
-	        "coordinates": hamtramck3Coordinates
+	        "coordinates": hamtramckCoordinates()
 	    },
 	    "properties": {
 	        "name": "hamtramck3",
@@ -389,28 +267,699 @@ var completeFeatureCollection = {
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
     		'marker-color': '#878F5A',
-    		'marker-symbol':'police'
+    		'marker-symbol':'police',
+    		'description': 'Sweeping cuts in city services, particularly the fire department. 12 of 27 of the city’s firefighters were laid off and the union accepted concessions, including a 10 percent wage cut and cuts to health care benefits.',
+    		'source': 'https://www.wsws.org/en/articles/2013/06/06/detr-j06.html',
+    		'EFM': {
+    			'name':'Louis Schimmel',
+    			'bio':'needs website'
+    		}
 	    }
 	},
 	{
 	    "type": "Feature",
 	    "geometry": {
 	        "type": "Point",
-	        "coordinates": bentonHarbor2Coordinates
+	        "coordinates": hamtramckCoordinates()
 	    },
 	    "properties": {
-	        "name": "bentonHarbor2",
-	        "locationName": "Benton Harbor",
+	        "name": "hamtramck2",
+	        "locationName": "Hamtramck",
 	        "consequences": ["socialServices"],
 	        "year": 2013,
 	        "color": "green",
 	        "law": "Public Act 436",
 	        'marker-size': 'large',
     		'marker-color': '#878F5A',
-    		'marker-symbol':'water'
+    		'marker-symbol':'water',
+    		'description': 'EM puts up community garden/collectivized farm for auction.',
+    		'source': 'http://www.eclectablog.com/2013/10/hamtramck-emergency-manager-sweeps-away-agreements-puts-wildly-successful-urban-farmcomm-garden-land-up-for-auction.html',
+    		'EFM': {
+    			'name':'Louis Schimmel',
+    			'bio':'needs website'
+    		}
 	    }
-	}]
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": highlandParkCoordinates()
+	    },
+	    "properties": {
+	        "name": "highlandPark2",
+	        "locationName": "Highland Park",
+	        "consequences": ["policeFire"],
+	        "year": 2012,
+	        "law": "Public Act 436",
+	        'marker-size': 'large',
+    		'marker-color': '#878F5A',
+    		'marker-symbol':'police',
+    		'description': 'Sweeping cuts in city services, particularly the fire department. 12 of 27 of the city’s firefighters were laid off and the union accepted concessions, including a 10 percent wage cut and cuts to health care benefits.',
+    		'source': 'https://www.wsws.org/en/articles/2013/06/06/detr-j06.html',
+    		'EFM': {
+    			'name':'Louis Schimmel',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": highlandParkCoordinates()
+	    },
+	    "properties": {
+	        "name": "highlandPark2",
+	        "locationName": "Highland Park",
+	        "consequences": ["pensions"],
+	        "year": 2005,
+	        "law": "Public Act 101",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol':'bank',
+    		'description': 'Emergency Manager Arthur Blackwell II was terminated in 2005 for taking $264,000 in payments not authoizedby State even though he had publiclyvannounced he would serve for an annual salarv of one dollar. In 2011 Blackwell was ordered to repay these amounts',
+    		'source': 'http://voiceofdetroit.net/wp-content/uploads/2012/03/Judiciary-PA4-report.pdf',
+    		'EFM': {
+    			'name':'Arthur Blackwell II',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": bentonHarborCoordinates()
+	    },
+	    "properties": {
+	        "name": "bentonHarbor",
+	        "locationName": "Benton Harbor",
+	        "consequences": ["pensions"],
+	        "year": 2011,
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'bank',
+    		'description': 'EM decreed that bsent prior express written authorization and approval by the Emergency Manager—himself—no City Board, Commission or Authority shall take any action for or on behalf of the City whatsoever other than: i) Call a meeting to order, ii) Approve of meeting minutes, iii) Adjourn a meeting. The move in effect abolished Benton Harbor’s elected City Commission and replaced it with an unelected bureaucrat, perhaps the first time this has happened in US history.',
+    		'source': 'https://www.wsws.org/en/articles/2013/06/06/detr-j06.html',
+    		'EFM': {
+    			'name':'Joe Harris',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": bentonHarborCoordinates()
+	    },
+	    "properties": {
+	        "name": "bentonHarbor",
+	        "locationName": "Benton Harbor",
+	        "consequences": ["layoffs"],
+	        "year": 2011,
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'hairdresser',
+    		'description': 'EM fired the majority of the Brownfield Redevelopment Authority, the group responsible for directing how brownfields, former industrial sites, are developed. EM subsequently barred Authority from taking any action without his express written consent.',
+    		'source': 'http://www.eclectablog.com/2011/06/benton-harbor-efm-continues.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+eclectablog%2FkInS+%28Eclectablog%29',
+    		'EFM': {
+    			'name':'Joseph L. Harris',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": bentonHarborCoordinates()
+	    },
+	    "properties": {
+	        "name": "bentonHarbor",
+	        "locationName": "Benton Harbor",
+	        "consequences": ["policeFire"],
+	        "year": 2010,
+	        "law": "Public Act 101",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol':'police',
+    		'description': 'EM proposes to eliminate fire department as part of proposed 2011 budget cuts.',
+    		'source': 'http://www.firefighterclosecalls.com/news/fullstory/newsid/111483',
+    		'EFM': {
+    			'name':'Joseph L. Harris',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": highlandParkCoordinates()
+	    },
+	    "properties": {
+	        "name": "highLandPark1",
+	        "locationName": "Highland Park",
+	        "consequences": ["schools"],
+	        "year": 2012,
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'college',
+    		'description': 'Schools in district converted to charter, for-profit schools.',
+    		'source': 'http://www.michigancapitolconfidential.com/21409',
+    		'EFM': {
+    			'name':'Donald Weatherspoon',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": highlandParkCoordinates()
+	    },
+	    "properties": {
+	        "name": "highLandPark1",
+	        "locationName": "Highland Park",
+	        "consequences": ["schools"],
+	        "year": 2015,
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'college',
+    		'description': 'Highland Park high school closed.',
+    		'source': 'http://www.michigancapitolconfidential.com/21409',
+    		'EFM': {
+    			'name':'Donald Weatherspoon',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": flintCoordinates()
+	    },
+	    "properties": {
+	        "name": "flint1",
+	        "locationName": "Flint",
+	        "consequences": ["layoffs"],
+	        "year": 2013,
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'hairdresser',
+    		'description': 'http://www.mlive.com/entertainment/flint/index.ssf/2013/05/santa_claus_shopping_carts_and.html#incart_river',
+    		'source': 'EM auctions city hall "Santa Claus" prop for $5.',
+    		'EFM': {
+    			'name':'Ed Kurtz',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": pontiacCoordinates()
+	    },
+	    "properties": {
+	        "name": "pontiacHarbor",
+	        "locationName": "Pontiac",
+	        "consequences": ["socialServices"],
+	        "year": 2010,
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'water',
+    		'description': ' EM made a contract for water treatment services with United Water Services permanent, outsourcing the water treatment to them and laying off city water treatment officials. A year prior, United Water was indicted by the U.S. Department of Justice last December for violating the Clean Water Act.',
+    		'source': 'http://www.eclectablog.com/2011/06/breaking-michigan-efm-outsources-water.html',
+    		'EFM': {
+    			'name':'Michael Stampfler',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+// http://www.huffingtonpost.com/2012/01/11/rep-gary-peters-pontiac-federal-funding-emergency-manager-louis-schimmel_n_1199016.html
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": pontiacCoordinates()
+	    },
+	    "properties": {
+	        "name": "pontiacHarbor",
+	        "locationName": "Pontiac",
+	        "consequences": ["pensions"],
+	        "year": 2010,
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'bank',
+    		'description': 'EM signs away federal HUD grants intended for city of Pontiax to county for dispersal without legally obligating county to spend any of the money on the city.',
+    		'source': 'http://www.huffingtonpost.com/2012/01/11/rep-gary-peters-pontiac-federal-funding-emergency-manager-louis-schimmel_n_1199016.html',
+    		'EFM': {
+    			'name':'Lou Schimmel',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": pontiacCoordinates()
+	    },
+	    "properties": {
+	        "name": "pontiacHarbor",
+	        "locationName": "Pontiac",
+	        "consequences": ["pensions"],
+	        "year": 2013,
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'bank',
+    		'description': "EM attempted to eliminate health care benefits altogether for the city's 1,000 or so general employee retirees, most of whom are Medicare-eligible and stop providing supplemental Medicare Advantage insurance for general retirees, for which it pays $362 per retiree per month.",
+    		'source': 'http://www.theoaklandpress.com/general-news/20130416/pontiac-emergency-managers-exit-plan-ax-health-care-for-most-retirees-but-increase-pension-payments',
+    		'EFM': {
+    			'name':'Lou Schimmel',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": pontiacCoordinates()
+	    },
+	    "properties": {
+	        "name": "pontiacHarbor",
+	        "locationName": "Pontiac",
+	        "consequences": ["layoffs"],
+	        "year": 2013,
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'hairdresser',
+    		'description': "The city’s payroll, once numbering more than 600 workers, now amounts to about 50 public employees. ",
+    		'source': 'http://www.nytimes.com/2013/03/14/us/lessons-for-detroit-in-pontiacs-years-of-emergency-oversight.html',
+    		'EFM': {
+    			'name':'Lou Schimmel',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": pontiacCoordinates()
+	    },
+	    "properties": {
+	        "name": "pontiacHarbor",
+	        "locationName": "Pontiac",
+	        "consequences": ["policeFire"],
+	        "year": 2013,
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'police',
+    		'description': "Both fire and police department outsourced to neighoring municipalities.",
+    		'source': 'http://www.nytimes.com/2013/03/14/us/lessons-for-detroit-in-pontiacs-years-of-emergency-oversight.html',
+    		'EFM': {
+    			'name':'Lou Schimmel',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": pontiacCoordinates()
+	    },
+	    "properties": {
+	        "name": "pontiacHarbor",
+	        "locationName": "Pontiac",
+	        "consequences": ["layoffs"],
+	        "year": 2013,
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'hairdresser',
+    		'description': "EM attempted to eliminate health care benefits altogether for the city's 1,000 or so general employee retirees, most of whom are Medicare-eligible and stop providing supplemental Medicare Advantage insurance for general retirees, for which it pays $362 per retiree per month.",
+    		'source': 'http://www.theoaklandpress.com/general-news/20130416/pontiac-emergency-managers-exit-plan-ax-health-care-for-most-retirees-but-increase-pension-payments',
+    		'EFM': {
+    			'name':'Lou Schimmel',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+
+	{
+	    "type": "Feature",
+	    "properties": {
+	        "name": "detroit1",
+	        "locationName": "Detroit",
+	        "consequences": ["schools"],
+	        "year": 2009,
+	        "law": "Public Act 101",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol':'college',
+    		'description': "EM aimed to reform everything from instruction to evaluation processes for staff, most notably by implementing a series of additional standardized tests during the school year. Judge overturned plan. While the EFM law required EM to draft a financial plan to regulate expenditures and investments, the court could not recognize a power that the state legislature did not grant an EFM-in this case, usuq)ing the elected board's authority over academics and curriculum",
+    		'source': 'http://voiceofdetroit.net/wp-content/uploads/2012/03/Judiciary-PA4-report.pdf',
+    		'EFM': {
+    			'name':'Robert Bobb',
+    			'bio':'needs website'
+    		}
+	    },
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": detroitCoordinates()
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "properties": {
+	        "name": "detroit1",
+	        "locationName": "Detroit",
+	        "consequences": ["policeFire"],
+	        "year": 2013,
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol':'police',
+    		'description': "Downsized fire department from 45 to 60 rigs and imposed new contracts on those not downsized.",
+    		'source': 'http://www.deadlinedetroit.com/articles/4456/detroit_will_impose_new_contract_on_firefighters_july_1',
+    		'EFM': {
+    			'name':'Robert Bobb',
+    			'bio':'needs website'
+    		}
+	    },
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": detroitCoordinates()
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": muskegonHeightsCoordinates()
+	    },
+	    "properties": {
+	        "name": "muskegonHeights1",
+	        "locationName": "Muskegon Heights",
+	        "consequences": ["schools"],
+	        "year": 2012,
+	        "law": "Public Act 436",
+	        'marker-size': 'large',
+    		'marker-color': '#878F5A',
+    		'marker-symbol':'college',
+    		'description': "EM decided to make Muskegon the first school district in Michigan to convert entirely to a charter district, and turned the operation of its schools over to a for-profit company. ",
+    		'source': 'http://michiganradio.org/post/struggles-muskegon-heights-school-district',
+    		'EFM': {
+    			'name':'Donald Weatherspoon',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": ecorseCoordinates()
+	    },
+	    "properties": {
+	        "name": "ecorse1",
+	        "locationName": "Ecorse",
+	        "consequences": ["policeFire"],
+	        "year": 2009,
+	        "law": "Public Act 101",
+	        'marker-size': 'large',
+    		'marker-color': '#BE9A6B',
+    		'marker-symbol':'police',
+    		'description': "Merged and reduced the police and fire departments.  Privatized EMS service.",
+    		'source': 'http://www.mlive.com/news/detroit/index.ssf/2013/04/ecorse_escapes_emergency_manag.html',
+    		'EFM': {
+    			'name':'Joyce Parker',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": flintCoordinates()
+	    },
+	    "properties": {
+	        "name": "flint1",
+	        "locationName": "Flint",
+	        "consequences": ["socialServices"],
+	        "year": 2015,
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'water',
+    		'description': "The emergency manager switched the city’s water from Detroit as the supplier to the old, and by now decrepit, Flint water supply system. The old Flint system with its lead pipes provided contaminated water. Thanks to a local pediatrician, Dr. Mona Hanna-Attisha, on her own, provided the evidence that the lead levels in children increased by two or three times following the switch to Flint River water from that of Detroit, or Lake Huron water.  ... The elected city council voted overwhelmingly (7-1) to return to the Detroit water. The emergency manager overrode that vote claiming the vote to be “incomprehensible” and that the Detroit water was no safer than that of the lead-poisoned Flint water supply. This claim and this decision by the emergency manager was made even though in February 2015 there was firm data showing the elevated lead levels in Flint’s water supply.",
+    		'source': '// http://www.theoaklandpress.com/article/OP/20160109/NEWS/160109551',
+    		'EFM': {
+    			'name':'Ed Kurtz',
+    			'bio':'needs website'
+    		}
+	    }
+	},
+	{
+	    "type": "Feature",
+	    "geometry": {
+	        "type": "Point",
+	        "coordinates": flintCoordinates()
+	    },
+	    "properties": {
+	        "name": "flint1",
+	        "locationName": "Flint",
+	        "consequences": ["layoffs"],
+	        "year": 2013,
+	        "law": "Public Act 4",
+	        'marker-size': 'large',
+    		'marker-color': '#6C7A89',
+    		'marker-symbol':'hairdresser',
+    		'description': "All salaries and benefits of elected officials were eliminated.",
+    		'source': 'http://www.mlive.com/news/flint/index.ssf/2013/04/flint_city_council_mayors_pay.html',
+    		'EFM': {
+    			'name':'Ed Kurtz',
+    			'bio':'needs website'
+    		}
+	    }
+	}
+// http://www.theoaklandpress.com/article/OP/20160109/NEWS/160109551
+// 
+	]
+	// http://voiceofdetroit.net/wp-content/uploads/2012/03/Judiciary-PA4-report.pdf
 };
+///  OLD ONES
+///  
+///  
+///  
+///  
+	// {
+	//     "type": "Feature",
+	//     "geometry": {
+	//         "type": "Point",
+	//         "coordinates": highlandParkCoordinates
+	//     },
+	//     "properties": {
+	//         "name": "highLandPark1",
+	//         "locationName": "Highland Park",
+	//         "consequences": ["pensions"],
+	//         "year": 2000,
+	//         "law": "Public Act 101",
+	//         'marker-size': 'large',
+ //    		'marker-color': '#BE9A6B',
+ //    		'marker-symbol':'bank'
+	//     }
+	// },
+	// {
+	//     "type": "Feature",
+	//     "geometry": {
+	//         "type": "Point",
+	//         "coordinates": flintCoordinates
+	//     },
+	//     "properties": {
+	//         "name": "flint1",
+	//         "locationName": "Flint",
+	//         "consequences": ["layoffs"],
+	//         "year": 2002,
+	//         "law": "Public Act 101",
+	//         'marker-size': 'large',
+ //    		'marker-color': '#BE9A6B',
+ //    		'marker-symbol':'hairdresser'
+	//     }
+	// },
+	// {
+	//     "type": "Feature",
+	//     "geometry": {
+	//         "type": "Point",
+	//         "coordinates": threeOaksCoordinates
+	//     },
+	//     "properties": {
+	//         "name": "threeOaks1",
+	//         "locationName": "Three Oaks",
+	//         "consequences": ["policeFire"],
+	//         "year": 2008,
+	//         "law": "Public Act 101",
+	//         'marker-size': 'large',
+ //    		'marker-color': '#BE9A6B',
+ //    		'marker-symbol':'police'
+	//     }
+	// },
+	// {
+	//     "type": "Feature",
+	//     "properties": {
+	//         "name": "detroit1",
+	//         "locationName": "Detroit",
+	//         "consequences": ["schools"],
+	//         "year": 2009,
+	//         "law": "Public Act 101",
+	//         'marker-size': 'large',
+ //    		'marker-color': '#BE9A6B',
+ //    		'marker-symbol':'college'
+	//     },
+	//     "geometry": {
+	//         "type": "Point",
+	//         "coordinates": detroitCoordinates
+	//     }
+	// },
+	// {
+	//     "type": "Feature",
+	//     "geometry": {
+	//         "type": "Point",
+	//         "coordinates": bentonHarborCoordinates
+	//     },
+	//     "properties": {
+	//         "name": "bentonHarbor",
+	//         "locationName": "Benton Harbor",
+	//         "consequences": ["pensions"],
+	//         "year": 2010,
+	//         "law": "Public Act 4",
+	//         'marker-size': 'large',
+ //    		'marker-color': '#6C7A89',
+ //    		'marker-symbol':'bank'
+	//     }
+	// },
+	// {
+	//     "type": "Feature",
+	//     "geometry": {
+	//         "type": "Point",
+	//         "coordinates": pontiacCoordinates
+	//     },
+	//     "properties": {
+	//         "name": "pontiacHarbor",
+	//         "locationName": "Pontiac",
+	//         "consequences": ["layoffs"],
+	//         "year": 2010,
+	//         "law": "Public Act 4",
+	//         'marker-size': 'large',
+ //    		'marker-color': '#6C7A89',
+ //    		'marker-symbol':'hairdresser'
+	//     }
+	// },
+	// {
+	//     "type": "Feature",
+	//     "geometry": {
+	//         "type": "Point",
+	//         "coordinates": flint2Coordinates
+	//     },
+	//     "properties": {
+	//         "name": "flint2",
+	//         "locationName": "Flint",
+	//         "consequences": ["schools"],
+	//         "year": 2011,
+	//         "law": "Public Act 4",
+	//         'marker-size': 'large',
+ //    		'marker-color': '#6C7A89',
+ //    		'marker-symbol':'college'
+	//     }
+	// },
+	// {
+	//     "type": "Feature",
+	//     "geometry": {
+	//         "type": "Point",
+	//         "coordinates": highlandPark2Coordinates
+	//     },
+	//     "properties": {
+	//         "name": "highlandPark2",
+	//         "locationName": "Highland Park",
+	//         "consequences": ["policeFire"],
+	//         "year": 2012,
+	//         "law": "Public Act 436",
+	//         'marker-size': 'large',
+ //    		'marker-color': '#878F5A',
+ //    		'marker-symbol':'police'
+	//     }
+	// },
+	// {
+	//     "type": "Feature",
+	//     "geometry": {
+	//         "type": "Point",
+	//         "coordinates": allenParkCoordinates
+	//     },
+	//     "properties": {
+	//         "name": "allenPark1",
+	//         "locationName": "Allen Park",
+	//         "consequences": ["layoffs"],
+	//         "year": 2012,
+	//         "law": "Public Act 436",
+	//         'marker-size': 'large',
+ //    		'marker-color': '#878F5A',
+ //    		'marker-symbol':'hairdresser'
+	//     }
+	// },
+	// {
+	//     "type": "Feature",
+	//     "geometry": {
+	//         "type": "Point",
+	//         "coordinates": hamtramck3Coordinates
+	//     },
+	//     "properties": {
+	//         "name": "hamtramck3",
+	//         "locationName": "Hamtramck",
+	//         "consequences": ["policeFire"],
+	//         "year": 2013,
+	//         "color": "green",
+	//         "law": "Public Act 436",
+	//         'marker-size': 'large',
+ //    		'marker-color': '#878F5A',
+ //    		'marker-symbol':'police'
+	//     }
+	// },
+	// {
+	//     "type": "Feature",
+	//     "geometry": {
+	//         "type": "Point",
+	//         "coordinates": bentonHarbor2Coordinates
+	//     },
+	//     "properties": {
+	//         "name": "bentonHarbor2",
+	//         "locationName": "Benton Harbor",
+	//         "consequences": ["socialServices"],
+	//         "year": 2013,
+	//         "color": "green",
+	//         "law": "Public Act 436",
+	//         'marker-size': 'large',
+ //    		'marker-color': '#878F5A',
+ //    		'marker-symbol':'water'
+	    // }
 
 // Need to do:
 // Add key
@@ -475,6 +1024,10 @@ var selectedYearRangeArray = [1988, 2016]
 var filterObject = {selectedStatutes: selectedStatuteArray, selectedConsequences: selectedConsequenceArray,
 	selectedYearRange: selectedYearRangeArray};
 
+
+// https://gis.stackexchange.com/questions/143099/use-mapbox-featurelayer-to-create-marker-clusters
+// var markers = new L.MarkerClusterGroup();
+
 var myLayer = L.mapbox.featureLayer().setFilter(function(feature) {
   return filterObject.selectedStatutes.includes(feature.properties.law) && filterObject.selectedConsequences.some(function(consequence) {
 	  		return feature.properties.consequences.indexOf(consequence) >= 0;
@@ -511,12 +1064,16 @@ function empty() {
 
 myLayer.setGeoJSON(completeFeatureCollection);
 // Listen for individual marker clicks.
+var oms = new OverlappingMarkerSpiderfier(map);
+
 myLayer.on('click',function(e) {
+
+// oms.on('click',function(e) {
     // Force the popup closed.
     e.layer.closePopup();
 
     var feature = e.layer.feature;
-    var content = '<h3>'+'Event Details'+'</h3>'+'<div><strong> City: ' + feature.properties.locationName + '</strong>' + '<p><div>Legal basis: ' + feature.properties.law + '</div></p>'+'<p><div>Year: ' + feature.properties.year + '</div></p>'+'<p><div>Action taken: ' + feature.properties.consequences + '</div></p>'+'<p><div>Description: ' + 'This is where the description goes.' + '</div></p>'+'<p><div>Source: ' + 'Link to article or source identifying the event.' + '</div></p>'+'</div>'+"<button style='color:black' id='back-button'>Back</button>";
+    var content = '<h3>'+'Event Details'+'</h3>'+'<div><strong> City: ' + feature.properties.locationName + '</strong>' + '<p><div>Legal basis: ' + feature.properties.law + '</div></p>'+'<p><div>Year: ' + feature.properties.year + '</div></p>'+'<p><div>Action taken: ' + feature.properties.consequences + '</div></p>'+'<p><div>Description: ' + feature.properties.description + '</div></p>'+'<p><div>Source: ' + feature.properties.source + '</div></p>'+'</div>'+"<button style='color:black' id='back-button'>Back</button>";
 
     info.innerHTML = content;
     $(info).show();
